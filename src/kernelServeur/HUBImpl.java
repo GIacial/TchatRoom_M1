@@ -15,7 +15,7 @@ public class HUBImpl implements HUB {
 
 	/**
 	 * Permet de se connecter au HUB
-	 * On lui donne un pseudo et lui nous donne une clé qui nous identifie
+	 * On lui donne un pseudo et lui nous donne une clï¿½ qui nous identifie
 	 * Peut renvoyer l'exception PseudoNonLibre
 	 * @param pseudo le pseudo
 	 */
@@ -25,7 +25,7 @@ public class HUBImpl implements HUB {
 	}
 
 	/**
-	 * Ce connecter à une tchatRoom
+	 * Ce connecter ï¿½ une tchatRoom
 	 * Renvoi l'exception TchatRoomNotFound ou WrongPassword
 	 * @param nom le nom de la tchatroom
 	 * @param password le mot de passe de la room
@@ -38,7 +38,7 @@ public class HUBImpl implements HUB {
 	}
 
 	/**
-	 * Créé une chatRoom dans ce HUB
+	 * Crï¿½ï¿½ une chatRoom dans ce HUB
 	 * Peut renvoyer l'exception TchatRoomAlreadyExist
 	 * @param nom le nom de la room
 	 * @param mdp le mot de passe de la room (vide ou null => public)
@@ -60,7 +60,7 @@ public class HUBImpl implements HUB {
 	}
 
 	/**
-	 * Dis si la room est privée
+	 * Dis si la room est privï¿½e
 	 * Peut renvoyer une exception TchatroomNotFound
 	 * @param nom le nom de la chatroom a verifie
 	 */
@@ -89,7 +89,7 @@ public class HUBImpl implements HUB {
 	}
 
 	/**
-	 * Teste l'activité des chatroom , si une room n'est pas assez active on envoie un object msg null pour verifier si le listener est joingnable
+	 * Teste l'activitï¿½ des chatroom , si une room n'est pas assez active on envoie un object msg null pour verifier si le listener est joingnable
 	 */
 	private void testActiviteRoom() {
 		// TODO - implement HUBImpl.testActiviteRoom

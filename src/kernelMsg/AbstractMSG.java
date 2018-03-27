@@ -14,7 +14,7 @@ public abstract class AbstractMSG {
 	 */
 	private long LIMITE_TAILLE;
 	/**
-	 * L'identificateur de l'auteur du msg (soit id donné par le client , soit le pseudo mit par la tchatroom)
+	 * L'identificateur de l'auteur du msg (soit id donnï¿½ par le client , soit le pseudo mit par la tchatroom)
 	 */
 	private string auteur;
 

@@ -8,7 +8,7 @@ import kernelServeur.*;
 public class Client {
 
 	/**
-	 * Identificateur récupéré aprés la connection
+	 * Identificateur rï¿½cupï¿½rï¿½ aprï¿½s la connection
 	 */
 	private string Identificateur;
 	/**
@@ -30,7 +30,7 @@ public class Client {
 	}
 
 	/**
-	 * permet de savoir si une room est privée
+	 * permet de savoir si une room est privï¿½e
 	 * //peut renvoyer l'exception TchatRoomNotFoundException
 	 * @param nom nom de la room
 	 */
@@ -43,7 +43,7 @@ public class Client {
 	 * permet de cree une room
 	 * peut envoyer l'exception TchatRoomAlreadyExistException
 	 * @param nom nom de la salle
-	 * @param mdp mot de passe si privé (sinon null ou vide)
+	 * @param mdp mot de passe si privï¿½ (sinon null ou vide)
 	 */
 	public TchatRoom createChatRoom(string nom, string mdp) {
 		// TODO - implement Client.createChatRoom
@@ -51,7 +51,7 @@ public class Client {
 	}
 
 	/**
-	 * se connecté a une chatroom
+	 * se connectï¿½ a une chatroom
 	 * @param nom nom de la room
 	 * @param mdp mdp de la room
 	 */

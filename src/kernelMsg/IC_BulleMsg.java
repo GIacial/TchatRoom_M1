@@ -3,8 +3,8 @@ package kernelMsg;
 public interface IC_BulleMsg {
 
 	/**
-	 * ajout un element graphics à la bulle
-	 * @param element l'élément à ajouter
+	 * ajout un element graphics ï¿½ la bulle
+	 * @param element l'ï¿½lï¿½ment ï¿½ ajouter
 	 */
 	void addItem(int element);
 

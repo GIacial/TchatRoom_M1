@@ -17,8 +17,8 @@ public class TchatRoomImpl implements TchatRoom {
 	 */
 	private int clients;
 	/**
-	 * la date de la derniere activité
-	 * //Permet au hub de vérifie si des channels on des personne qui on crash
+	 * la date de la derniere activitï¿½
+	 * //Permet au hub de vï¿½rifie si des channels on des personne qui on crash
 	 */
 	private int tempsDerniereActivite;
 	/**
@@ -47,7 +47,7 @@ public class TchatRoomImpl implements TchatRoom {
 	}
 
 	/**
-	 * Ajoute un client à la chatroom
+	 * Ajoute un client ï¿½ la chatroom
 	 * @param pseudo le pseudo du client
 	 * @param listener la moyen de joindre le client
 	 */

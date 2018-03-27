@@ -9,14 +9,14 @@ public interface HUB {
 
 	/**
 	 * Permet de se connecter au HUB
-	 * On lui donne un pseudo et lui nous donne une clé qui nous identifie
+	 * On lui donne un pseudo et lui nous donne une clï¿½ qui nous identifie
 	 * Peut renvoyer l'exception PseudoNonLibreException
 	 * @param pseudo le pseudo
 	 */
 	abstract string connexion(string pseudo);
 
 	/**
-	 * Ce connecter à une tchatRoom
+	 * Ce connecter ï¿½ une tchatRoom
 	 * Renvoi l'exception TchatRoomNotFoundException ou WrongPasswordException
 	 * @param nom le nom de la tchatroom
 	 * @param password le mot de passe de la room
@@ -26,7 +26,7 @@ public interface HUB {
 	abstract TchatRoom connectionChatRoom(string nom, string password, string id, MsgListener listener);
 
 	/**
-	 * Créé une chatRoom dans ce HUB
+	 * Crï¿½ï¿½ une chatRoom dans ce HUB
 	 * Peut renvoyer l'exception TchatRoomAlreadyExistException
 	 * @param nom le nom de la room
 	 * @param mdp le mot de passe de la room (vide ou null => public)
@@ -42,7 +42,7 @@ public interface HUB {
 	abstract void getAllChatRoom();
 
 	/**
-	 * Dis si la room est privée
+	 * Dis si la room est privï¿½e
 	 * Peut renvoyer une exception TchatRoomNotFoundException
 	 * @param nom le nom de la chatroom a verifie
 	 */
