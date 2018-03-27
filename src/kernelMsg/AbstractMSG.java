@@ -34,6 +34,6 @@ public abstract class AbstractMSG {
 	 * Mets le contenu du msg dans la bulle Graphique
 	 * @param bulle la bulle graphique du msg
 	 */
-	public abstract void affche(IC_BulleMsg bulle);
+	public abstract void affiche(IC_BulleMsg bulle);
 
 }

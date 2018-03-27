@@ -4,6 +4,7 @@ import KernelClient.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 
 
 /**
@@ -43,7 +44,7 @@ public interface HUB extends Remote{
 	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
-	abstract void getAllChatRoom() throws RemoteException;
+	abstract HashMap<String, String> getAllChatRoom() throws RemoteException;
 
 	/**
 	 * Dis si la room est priv�e

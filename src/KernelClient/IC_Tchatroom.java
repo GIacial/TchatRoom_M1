@@ -3,7 +3,7 @@ package KernelClient;
 import kernelMsg.*;
 
 /**
- * Represente l'interface graphique pour une tchatrom
+ * Represente l'interface graphique pour une tchatrom (interface client)
  */
 public interface IC_Tchatroom {
 
