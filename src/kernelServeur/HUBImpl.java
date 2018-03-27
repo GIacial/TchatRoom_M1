@@ -3,21 +3,25 @@ package kernelServeur;
 import KernelClient.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import kernelMsg.PseudoNonLibreException;
 
 public class HUBImpl extends UnicastRemoteObject implements HUB {
 
 	/**
 	 * Collection (Nom,Tchatroom) qui contient toutes les rooms existante
 	 */
-	private int TchatRooms;
+	private HashMap<String, String> TchatRooms;
 	/**
 	 * l'identificateur des clients
 	 */
         
         
-        
 	private IdentificateurImpl identificater;
 
+        
+        
+        //Rajouté par défaut
         public HUBImpl() throws RemoteException{
             
         }
@@ -28,10 +32,13 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * On lui donne un pseudo et lui nous donne une cl� qui nous identifie
 	 * Peut renvoyer l'exception PseudoNonLibre
 	 * @param pseudo le pseudo
+         * @return 
+         * @throws kernelMsg.PseudoNonLibreException
 	 */
+        @Override
 	public String connexion(String pseudo){
-		// TODO - implement HUBImpl.connexion
-		throw new UnsupportedOperationException();
+                return this.identificater.connexion(pseudo); 
+                
 	}
 
 	/**
@@ -64,9 +71,9 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
-	public void getAllChatRoom() throws RemoteException{
+	public HashMap<String, String> getAllChatRoom() throws RemoteException{
 		// TODO - implement HUBImpl.getAllChatRoom
-		throw new UnsupportedOperationException();
+		return this.TchatRooms; 
 	}
 
 	/**
@@ -76,7 +83,12 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 */
 	public boolean isPrivate(String nom){
 		// TODO - implement HUBImpl.isPrivate
-		throw new UnsupportedOperationException();
+		/*if(this.TchatRooms.containsValue(nom)){
+                    return true; 
+                }else{
+                    //erreur 
+                }*/
+                return false; 
 	}
 
 	/**
@@ -95,7 +107,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 */
 	public void disconnect(String id){
 		// TODO - implement HUBImpl.disconnect
-		throw new UnsupportedOperationException();
+		this.identificater.disconnect(id);
 	}
 
 	/**
