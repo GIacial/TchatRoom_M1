@@ -10,7 +10,7 @@ public class Client {
 	/**
 	 * Identificateur r�cup�r� apr�s la connection
 	 */
-	private string Identificateur;
+	private String Identificateur;
 	/**
 	 * //stockage en collection
 	 * Tous les TchatRooms dont je fais parti
@@ -22,7 +22,7 @@ public class Client {
 	private HUB hub;
 
 	/**
-	 * //retourne une collection de string(nom des serveur)
+	 * //retourne une collection de String(nom des serveur)
 	 */
 	public void getAllTchatRoomName() {
 		// TODO - implement Client.getAllTchatRoomName
@@ -34,7 +34,7 @@ public class Client {
 	 * //peut renvoyer l'exception TchatRoomNotFoundException
 	 * @param nom nom de la room
 	 */
-	public boolean isPrivateTchatRoom(string nom) {
+	public boolean isPrivateTchatRoom(String nom) {
 		// TODO - implement Client.isPrivateTchatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -45,7 +45,7 @@ public class Client {
 	 * @param nom nom de la salle
 	 * @param mdp mot de passe si priv� (sinon null ou vide)
 	 */
-	public TchatRoom createChatRoom(string nom, string mdp) {
+	public TchatRoom createChatRoom(String nom, String mdp) {
 		// TODO - implement Client.createChatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -55,7 +55,7 @@ public class Client {
 	 * @param nom nom de la room
 	 * @param mdp mdp de la room
 	 */
-	public TchatRoom connectChatRoom(string nom, string mdp) {
+	public TchatRoom connectChatRoom(String nom, String mdp) {
 		// TODO - implement Client.connectChatRoom
 		throw new UnsupportedOperationException();
 	}

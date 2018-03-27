@@ -8,7 +8,7 @@ public abstract class AbstractMSG {
 	/**
 	 * le pseudo du destinataire
 	 */
-	private string destinataire;
+	private String destinataire;
 	/**
 	 * la taille max des msg en octect
 	 */
@@ -16,17 +16,17 @@ public abstract class AbstractMSG {
 	/**
 	 * L'identificateur de l'auteur du msg (soit id donn� par le client , soit le pseudo mit par la tchatroom)
 	 */
-	private string auteur;
+	private String auteur;
 
-	public string getDestinataire() {
+	public String getDestinataire() {
 		return this.destinataire;
 	}
 
-	public string getAuteur() {
+	public String getAuteur() {
 		return this.auteur;
 	}
 
-	public void setAuteur(string auteur) {
+	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
 

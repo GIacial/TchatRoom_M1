@@ -41,7 +41,7 @@ public class TchatRoomImpl implements TchatRoom {
 	 * //Peut renvoyer l'exception PseudoNotFoundException
 	 * @param id l'identifiant du client
 	 */
-	public void disconnect(string id) {
+	public void disconnect(String id) {
 		// TODO - implement TchatRoomImpl.disconnect
 		throw new UnsupportedOperationException();
 	}
@@ -51,7 +51,7 @@ public class TchatRoomImpl implements TchatRoom {
 	 * @param pseudo le pseudo du client
 	 * @param listener la moyen de joindre le client
 	 */
-	public void addClient(string pseudo, MsgListener listener) {
+	public void addClient(String pseudo, MsgListener listener) {
 		// TODO - implement TchatRoomImpl.addClient
 		throw new UnsupportedOperationException();
 	}

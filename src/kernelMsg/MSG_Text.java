@@ -8,7 +8,7 @@ public class MSG_Text extends AbstractMSG {
 	/**
 	 * Le contenu du msg
 	 */
-	private string texte;
+	private String texte;
 
 	/**
 	 * Mets le contenu du msg dans la bulle Graphique

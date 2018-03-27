@@ -13,7 +13,7 @@ public interface HUB {
 	 * Peut renvoyer l'exception PseudoNonLibreException
 	 * @param pseudo le pseudo
 	 */
-	abstract string connexion(string pseudo);
+	abstract String connexion(String pseudo);
 
 	/**
 	 * Ce connecter � une tchatRoom
@@ -23,7 +23,7 @@ public interface HUB {
 	 * @param id identifiant du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom connectionChatRoom(string nom, string password, string id, MsgListener listener);
+	abstract TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener);
 
 	/**
 	 * Cr�� une chatRoom dans ce HUB
@@ -33,10 +33,10 @@ public interface HUB {
 	 * @param id l'identificateur du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom createChatRoom(string nom, string mdp, string id, MsgListener listener);
+	abstract TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener);
 
 	/**
-	 * //Renvoi une collection de nom de room donc collection de string
+	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
 	abstract void getAllChatRoom();
@@ -46,13 +46,13 @@ public interface HUB {
 	 * Peut renvoyer une exception TchatRoomNotFoundException
 	 * @param nom le nom de la chatroom a verifie
 	 */
-	abstract boolean isPrivate(string nom);
+	abstract boolean isPrivate(String nom);
 
 	/**
 	 * permet au client de liberer son pseudo
 	 * Peut lancer une exception PseudoNotFoundException
 	 * @param id identificateur du client
 	 */
-	abstract void disconnect(string id);
+	abstract void disconnect(String id);
 
 }

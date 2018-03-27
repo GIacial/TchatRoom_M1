@@ -19,7 +19,7 @@ public class HUBImpl implements HUB {
 	 * Peut renvoyer l'exception PseudoNonLibre
 	 * @param pseudo le pseudo
 	 */
-	public string connexion(string pseudo) {
+	public String connexion(String pseudo) {
 		// TODO - implement HUBImpl.connexion
 		throw new UnsupportedOperationException();
 	}
@@ -32,7 +32,7 @@ public class HUBImpl implements HUB {
 	 * @param id
 	 * @param listener
 	 */
-	public TchatRoom connectionChatRoom(string nom, string password, string id, MsgListener listener) {
+	public TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener) {
 		// TODO - implement HUBImpl.connectionChatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -45,13 +45,13 @@ public class HUBImpl implements HUB {
 	 * @param id
 	 * @param listener
 	 */
-	public TchatRoom createChatRoom(string nom, string mdp, string id, MsgListener listener) {
+	public TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener) {
 		// TODO - implement HUBImpl.createChatRoom
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * //Renvoi une collection de nom de room donc collection de string
+	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
 	public void getAllChatRoom() {
@@ -64,7 +64,7 @@ public class HUBImpl implements HUB {
 	 * Peut renvoyer une exception TchatroomNotFound
 	 * @param nom le nom de la chatroom a verifie
 	 */
-	public boolean isPrivate(string nom) {
+	public boolean isPrivate(String nom) {
 		// TODO - implement HUBImpl.isPrivate
 		throw new UnsupportedOperationException();
 	}
@@ -83,7 +83,7 @@ public class HUBImpl implements HUB {
 	 * permet au client de liberer son pseudo
 	 * @param id identificateur du client
 	 */
-	public void disconnect(string id) {
+	public void disconnect(String id) {
 		// TODO - implement HUBImpl.disconnect
 		throw new UnsupportedOperationException();
 	}

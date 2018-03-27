@@ -19,6 +19,6 @@ public interface TchatRoom {
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param id l'identifiant du client
 	 */
-	abstract void disconnect(string id);
+	abstract void disconnect(String id);
 
 }

@@ -12,11 +12,11 @@ public class IdentificateurImpl {
 
 	/**
 	 * ce connect avec un pseudo au system
-	 * Renvoi un string qui est l'identificateur pour le serveur(diff du serveur
+	 * Renvoi un String qui est l'identificateur pour le serveur(diff du serveur
 	 * Peut renvoyer l'exceptionPseudoNonLibreException
 	 * @param pseudo le pseudo de la personne
 	 */
-	public string connexion(string pseudo) {
+	public String connexion(String pseudo) {
 		// TODO - implement IdentificateurImpl.connexion
 		throw new UnsupportedOperationException();
 	}
@@ -26,7 +26,7 @@ public class IdentificateurImpl {
 	 * peut renvoyer l'exception PseudoNotFoundException
 	 * @param id l'identificateur du clinet
 	 */
-	public void disconnect(string id) {
+	public void disconnect(String id) {
 		// TODO - implement IdentificateurImpl.disconnect
 		throw new UnsupportedOperationException();
 	}
@@ -35,7 +35,7 @@ public class IdentificateurImpl {
 	 * donne le pseudo qui correspond a id
 	 * @param id identificateur du client
 	 */
-	public string getPseudo(int id) {
+	public String getPseudo(int id) {
 		// TODO - implement IdentificateurImpl.getPseudo
 		throw new UnsupportedOperationException();
 	}
