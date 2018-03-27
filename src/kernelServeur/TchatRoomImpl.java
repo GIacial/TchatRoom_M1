@@ -28,6 +28,11 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 	 */
 	private IdentificateurImpl identificateur;
 
+        
+        public TchatRoomImpl() throws RemoteException{
+            
+        }
+        
 	/**
 	 * Envoie un msg
 	 * Peut renvoyer l'exception PseudoNotFoundException
@@ -35,7 +40,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * @throws java.rmi.RemoteException
 	 */
         @Override
-	public void sendMsg(AbstractMSG msg) throws RemoteException{
+	public void sendMsg(AbstractMSG msg){
 		// TODO - implement TchatRoomImpl.sendMsg
 		throw new UnsupportedOperationException();
 	}
@@ -47,7 +52,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * @throws java.rmi.RemoteException
 	 */
         @Override
-	public void disconnect(String id) throws RemoteException{
+	public void disconnect(String id){
 		// TODO - implement TchatRoomImpl.disconnect
 		throw new UnsupportedOperationException();
 	}
@@ -58,7 +63,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 	 * @param listener la moyen de joindre le client
          * @throws java.rmi.RemoteException
 	 */
-	public void addClient(String pseudo, MsgListener listener) throws RemoteException{
+	public void addClient(String pseudo, MsgListener listener){
 		// TODO - implement TchatRoomImpl.addClient
 		throw new UnsupportedOperationException();
 	}

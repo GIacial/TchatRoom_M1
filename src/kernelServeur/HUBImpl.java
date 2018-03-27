@@ -13,15 +13,23 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	/**
 	 * l'identificateur des clients
 	 */
+        
+        
+        
 	private IdentificateurImpl identificater;
 
+        public HUBImpl() throws RemoteException{
+            
+        }
+        
+        
 	/**
 	 * Permet de se connecter au HUB
 	 * On lui donne un pseudo et lui nous donne une cl� qui nous identifie
 	 * Peut renvoyer l'exception PseudoNonLibre
 	 * @param pseudo le pseudo
 	 */
-	public String connexion(String pseudo) throws RemoteException{
+	public String connexion(String pseudo){
 		// TODO - implement HUBImpl.connexion
 		throw new UnsupportedOperationException();
 	}
@@ -34,7 +42,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * @param id
 	 * @param listener
 	 */
-	public TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener) throws RemoteException{
+	public TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener){
 		// TODO - implement HUBImpl.connectionChatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -47,7 +55,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * @param id
 	 * @param listener
 	 */
-	public TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener) throws RemoteException{
+	public TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener){
 		// TODO - implement HUBImpl.createChatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -66,7 +74,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * Peut renvoyer une exception TchatroomNotFound
 	 * @param nom le nom de la chatroom a verifie
 	 */
-	public boolean isPrivate(String nom) throws RemoteException{
+	public boolean isPrivate(String nom){
 		// TODO - implement HUBImpl.isPrivate
 		throw new UnsupportedOperationException();
 	}
@@ -76,7 +84,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * Peut renvoyer (mais normalement pas) l'exception TchatRoomNotFoundException
 	 * @param room la room
 	 */
-	public void removeRoom(TchatRoom room) throws RemoteException{
+	public void removeRoom(TchatRoom room){
 		// TODO - implement HUBImpl.removeRoom
 		throw new UnsupportedOperationException();
 	}
@@ -85,7 +93,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * permet au client de liberer son pseudo
 	 * @param id identificateur du client
 	 */
-	public void disconnect(String id) throws RemoteException{
+	public void disconnect(String id){
 		// TODO - implement HUBImpl.disconnect
 		throw new UnsupportedOperationException();
 	}
@@ -93,7 +101,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	/**
 	 * Teste l'activit� des chatroom , si une room n'est pas assez active on envoie un object msg null pour verifier si le listener est joingnable
 	 */
-	private void testActiviteRoom() throws RemoteException{
+	private void testActiviteRoom(){
 		// TODO - implement HUBImpl.testActiviteRoom
 		throw new UnsupportedOperationException();
 	}
