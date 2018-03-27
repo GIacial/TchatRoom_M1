@@ -5,6 +5,8 @@ import KernelClient.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import kernelMsg.PseudoNonLibreException;
+import kernelMsg.PseudoNotFoundException;
 
 
 /**
@@ -18,7 +20,7 @@ public interface HUB extends Remote{
 	 * Peut renvoyer l'exception PseudoNonLibreException
 	 * @param pseudo le pseudo
 	 */
-	abstract String connexion(String pseudo) throws RemoteException;
+	abstract String connexion(String pseudo) throws RemoteException, PseudoNonLibreException;
 
 	/**
 	 * Ce connecter � une tchatRoom
@@ -58,6 +60,6 @@ public interface HUB extends Remote{
 	 * Peut lancer une exception PseudoNotFoundException
 	 * @param id identificateur du client
 	 */
-	abstract void disconnect(String id)throws RemoteException;
+	abstract void disconnect(String id)throws RemoteException, PseudoNotFoundException;
 
 }

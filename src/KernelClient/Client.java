@@ -1,5 +1,7 @@
 package KernelClient;
 
+import java.rmi.RemoteException;
+import kernelMsg.PseudoNonLibreException;
 import kernelServeur.*;
 
 /**
@@ -20,6 +22,14 @@ public class Client {
 	 * le hub des room
 	 */
 	private HUB hub;
+        
+        
+        
+        public void connect(String pseudo) throws PseudoNonLibreException, RemoteException{
+            
+            String id = this.hub.connexion(pseudo); 
+            this.Identificateur = id; 
+        }
 
 	/**
 	 * //retourne une collection de String(nom des serveur)

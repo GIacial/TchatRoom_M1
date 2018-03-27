@@ -4,7 +4,10 @@ import KernelClient.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kernelMsg.PseudoNonLibreException;
+import kernelMsg.PseudoNotFoundException;
 
 public class HUBImpl extends UnicastRemoteObject implements HUB {
 
@@ -36,7 +39,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
          * @throws kernelMsg.PseudoNonLibreException
 	 */
         @Override
-	public String connexion(String pseudo){
+	public String connexion(String pseudo) throws PseudoNonLibreException{
                 return this.identificater.connexion(pseudo); 
                 
 	}
@@ -105,9 +108,10 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * permet au client de liberer son pseudo
 	 * @param id identificateur du client
 	 */
-	public void disconnect(String id){
-		// TODO - implement HUBImpl.disconnect
-		this.identificater.disconnect(id);
+	public void disconnect(String id) throws PseudoNotFoundException{
+            
+            this.identificater.disconnect(id);
+          
 	}
 
 	/**
