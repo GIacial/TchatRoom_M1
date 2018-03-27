@@ -1,4 +1,4 @@
 package kernelMsg;
 
-public class PseudoNonLibreException {
+public class PseudoNonLibreException extends Exception {
 }
