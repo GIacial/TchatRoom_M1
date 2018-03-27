@@ -2,11 +2,13 @@ package kernelServeur;
 
 import kernelMsg.*;
 import KernelClient.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  * implementation de la tchatroom
  */
-public class TchatRoomImpl implements TchatRoom {
+public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 
 	/**
 	 * le hub qui gere cette room
@@ -30,8 +32,10 @@ public class TchatRoomImpl implements TchatRoom {
 	 * Envoie un msg
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param msg un msg
+         * @throws java.rmi.RemoteException
 	 */
-	public void sendMsg(AbstractMSG msg) {
+        @Override
+	public void sendMsg(AbstractMSG msg) throws RemoteException{
 		// TODO - implement TchatRoomImpl.sendMsg
 		throw new UnsupportedOperationException();
 	}
@@ -40,8 +44,10 @@ public class TchatRoomImpl implements TchatRoom {
 	 * Permet de se deconnecter de la room
 	 * //Peut renvoyer l'exception PseudoNotFoundException
 	 * @param id l'identifiant du client
+         * @throws java.rmi.RemoteException
 	 */
-	public void disconnect(String id) {
+        @Override
+	public void disconnect(String id) throws RemoteException{
 		// TODO - implement TchatRoomImpl.disconnect
 		throw new UnsupportedOperationException();
 	}
@@ -50,8 +56,9 @@ public class TchatRoomImpl implements TchatRoom {
 	 * Ajoute un client � la chatroom
 	 * @param pseudo le pseudo du client
 	 * @param listener la moyen de joindre le client
+         * @throws java.rmi.RemoteException
 	 */
-	public void addClient(String pseudo, MsgListener listener) {
+	public void addClient(String pseudo, MsgListener listener) throws RemoteException{
 		// TODO - implement TchatRoomImpl.addClient
 		throw new UnsupportedOperationException();
 	}

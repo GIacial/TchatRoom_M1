@@ -1,6 +1,9 @@
 package KernelClient;
 
-public class MsgListenerImpl implements MsgListener {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class MsgListenerImpl extends UnicastRemoteObject implements MsgListener {
 
 	/**
 	 * l'interface de la chatrrom
@@ -12,7 +15,7 @@ public class MsgListenerImpl implements MsgListener {
 	 * @param InterfaceClient le panel qui affiche les msg de la tchatroom
 	 */
         @Override
-	public void recvMsg(IC_Tchatroom InterfaceClient) {
+	public void recvMsg(IC_Tchatroom InterfaceClient) throws RemoteException {
 		// TODO - implement MsgListenerImpl.recvMsg
 		throw new UnsupportedOperationException();
 	}
