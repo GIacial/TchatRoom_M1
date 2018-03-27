@@ -1,4 +1,4 @@
 package kernelMsg;
 
-public class PseudoNotFoundException {
+public class PseudoNotFoundException extends Exception{
 }

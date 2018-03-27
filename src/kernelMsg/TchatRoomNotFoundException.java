@@ -1,4 +1,4 @@
 package kernelMsg;
 
-public class TchatRoomNotFoundException {
+public class TchatRoomNotFoundException extends Exception {
 }

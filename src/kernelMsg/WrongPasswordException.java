@@ -1,4 +1,4 @@
 package kernelMsg;
 
-public class WrongPasswordException {
+public class WrongPasswordException extends Exception {
 }

@@ -1,4 +1,4 @@
 package kernelMsg;
 
-public class TchatRoomAlreadyExistException {
+public class TchatRoomAlreadyExistException extends Exception {
 }
