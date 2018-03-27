@@ -11,6 +11,8 @@ import kernelMsg.PseudoNotFoundException;
 
 public class HUBImpl extends UnicastRemoteObject implements HUB {
 
+    
+   
 	/**
 	 * Collection (Nom,Tchatroom) qui contient toutes les rooms existante
 	 */

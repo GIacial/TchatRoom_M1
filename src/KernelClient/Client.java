@@ -24,6 +24,10 @@ public class Client {
 	private HUB hub;
         
         
+        public Client(String adrSrv){
+            
+        }
+        
         
         public void connect(String pseudo) throws PseudoNonLibreException, RemoteException{
             

@@ -14,6 +14,8 @@ import kernelMsg.PseudoNotFoundException;
  */
 public interface HUB extends Remote{
 
+    
+        
 	/**
 	 * Permet de se connecter au HUB
 	 * On lui donne un pseudo et lui nous donne une cl� qui nous identifie
