@@ -2,10 +2,14 @@ package kernelServeur;
 
 import KernelClient.*;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+
 /**
  * la description d'un HUB
  */
-public interface HUB {
+public interface HUB extends Remote{
 
 	/**
 	 * Permet de se connecter au HUB
@@ -13,7 +17,7 @@ public interface HUB {
 	 * Peut renvoyer l'exception PseudoNonLibreException
 	 * @param pseudo le pseudo
 	 */
-	abstract String connexion(String pseudo);
+	abstract String connexion(String pseudo) throws RemoteException;
 
 	/**
 	 * Ce connecter � une tchatRoom
@@ -23,7 +27,7 @@ public interface HUB {
 	 * @param id identifiant du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener);
+	abstract TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener) throws RemoteException;
 
 	/**
 	 * Cr�� une chatRoom dans ce HUB
@@ -33,26 +37,26 @@ public interface HUB {
 	 * @param id l'identificateur du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener);
+	abstract TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener) throws RemoteException;
 
 	/**
 	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
-	abstract void getAllChatRoom();
+	abstract void getAllChatRoom() throws RemoteException;
 
 	/**
 	 * Dis si la room est priv�e
 	 * Peut renvoyer une exception TchatRoomNotFoundException
 	 * @param nom le nom de la chatroom a verifie
 	 */
-	abstract boolean isPrivate(String nom);
+	abstract boolean isPrivate(String nom)throws RemoteException;
 
 	/**
 	 * permet au client de liberer son pseudo
 	 * Peut lancer une exception PseudoNotFoundException
 	 * @param id identificateur du client
 	 */
-	abstract void disconnect(String id);
+	abstract void disconnect(String id)throws RemoteException;
 
 }
