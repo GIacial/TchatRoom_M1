@@ -5,12 +5,30 @@
  */
 package kernelServeur;
 
+import java.rmi.Naming;
+import java.rmi.Remote;
+
 /**
  *
  * @author lucille
  */
 public class MainServeur {
+    
+    public static final String factory_service = "TchatRoom_serveur_HUB";
+    
     public static void main(String[] args){
-        
+        HUB objserv = null;
+
+        try {
+
+            System.out.println("Creation de l'objet.");
+            objserv = new HUBImpl();
+            System.out.println("Enregistrement de l'objet.");
+            Naming.rebind(factory_service,(Remote) objserv);
+            System.out.println("serveur operationnel.");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
