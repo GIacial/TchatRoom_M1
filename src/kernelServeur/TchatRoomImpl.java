@@ -27,6 +27,11 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 	 * lien sur identificateur du hub
 	 */
 	private IdentificateurImpl identificateur;
+        
+        /**
+         * Le nom de la salle
+         */
+        private String name;
 
         
         public TchatRoomImpl() throws RemoteException{
@@ -68,4 +73,13 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 		throw new UnsupportedOperationException();
 	}
 
+        /**
+         * Le nom de la salle
+         * @return 
+         */
+        public String getName() {
+            return name;
+        }
+
+        
 }

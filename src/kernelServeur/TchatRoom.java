@@ -22,5 +22,12 @@ public interface TchatRoom extends Remote{
 	 * @param id l'identifiant du client
 	 */
 	abstract void disconnect(String id) throws RemoteException;
+        
+        /**
+         * Donne le nom de la salle
+         * @return
+         * @throws RemoteException 
+         */
+        abstract public String getName()throws RemoteException;
 
 }
