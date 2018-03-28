@@ -5,6 +5,7 @@
  */
 package UIClient;
 
+import KernelClient.Client;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -14,7 +15,7 @@ import javafx.scene.control.TabPane;
  */
 public class Tab_Tchat extends Tab{
     
-    public Tab_Tchat(){
+    public Tab_Tchat(Client c){
         super("Tchat");
         TabPane root = new TabPane();
         this.setContent(root);

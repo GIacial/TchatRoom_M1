@@ -5,8 +5,13 @@
  */
 package UIClient;
 
+import KernelClient.Client;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -15,12 +20,23 @@ import javafx.scene.layout.GridPane;
 public class Tab_HUB extends Tab {
     
     private UI_TchatroomList list;
+    private Client c;
+    private TextArea mdp;
     
-    public Tab_HUB (){
+    public Tab_HUB (Client c){
         super("HUB");
-        GridPane grid = new GridPane();
-        this.list = new UI_TchatroomList();
+        this.c = c;
+        BorderPane grid = new BorderPane();
+        this.list = new UI_TchatroomList(c.getAllTchatRoomName());
+        this.mdp = new TextArea();
+        this.mdp.setPrefRowCount(1);
+        VBox bottom = new VBox();
+        
+        
         this.setContent(grid);
-        grid.add(list, 0, 0, 4, 4);
+        grid.setCenter(list);
+        grid.setBottom(bottom);
+        bottom.getChildren().add(mdp);
+        
     }
 }

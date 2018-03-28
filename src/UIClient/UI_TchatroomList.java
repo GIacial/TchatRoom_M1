@@ -5,6 +5,7 @@
  */
 package UIClient;
 
+import java.util.Collection;
 import javafx.scene.layout.HBox;
 
 /**
@@ -13,7 +14,14 @@ import javafx.scene.layout.HBox;
  */
 public class UI_TchatroomList extends HBox {
     
-    public UI_TchatroomList(){
-       
+    public UI_TchatroomList(Collection<String> list){
+        this.updateRoomList(list);
+    }
+    
+    public void updateRoomList(Collection<String> list){
+        this.getChildren().clear();
+        for(String a : list){
+            this.getChildren().add(new UI_RoomListItem(a));
+        }
     }
 }

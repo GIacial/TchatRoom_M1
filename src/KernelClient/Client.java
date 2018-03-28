@@ -1,6 +1,8 @@
 package KernelClient;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collection;
 import kernelMsg.PseudoNonLibreException;
 import kernelServeur.*;
 
@@ -38,9 +40,12 @@ public class Client {
 	/**
 	 * //retourne une collection de String(nom des serveur)
 	 */
-	public void getAllTchatRoomName() {
+	public Collection<String> getAllTchatRoomName() {
 		// TODO - implement Client.getAllTchatRoomName
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+                Collection<String> r = new ArrayList<String>();
+                r.add("TestRoom");
+                return r;
 	}
 
 	/**
