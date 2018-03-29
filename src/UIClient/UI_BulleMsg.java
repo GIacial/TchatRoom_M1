@@ -6,17 +6,22 @@
 package UIClient;
 
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import kernelMsg.IC_BulleMsg;
 
 /**
  *
  * @author Jeremy
  */
-public class UI_BulleMsg implements IC_BulleMsg {
+public class UI_BulleMsg extends HBox implements IC_BulleMsg {
+    
+    public UI_BulleMsg(){
+        
+    }
 
     @Override
-    public void addItem(Node element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addItem(Node element) {       
+        this.getChildren().add(element);
     }
     
 }
