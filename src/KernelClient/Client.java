@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
 import kernelMsg.PseudoNonLibreException;
+import kernelMsg.TchatRoomAlreadyExistException;
+import kernelMsg.TchatRoomNotFoundException;
 import kernelServeur.*;
 
 /**
@@ -32,9 +34,12 @@ public class Client {
         
         
         public void connect(String pseudo) throws PseudoNonLibreException, RemoteException{
-            
+           /* 
             String id = this.hub.connexion(pseudo); 
-            this.Identificateur = id; 
+            this.Identificateur = id; */
+            if(pseudo.equalsIgnoreCase("")){
+                    throw new PseudoNonLibreException();
+                }
         }
 
 	/**
@@ -44,7 +49,8 @@ public class Client {
 		// TODO - implement Client.getAllTchatRoomName
 		//throw new UnsupportedOperationException();
                 Collection<String> r = new ArrayList<String>();
-                r.add("TestRoom");
+                r.add("public TestRoom 1");
+                r.add("private TestRoom 2");
                 return r;
 	}
 
@@ -53,9 +59,11 @@ public class Client {
 	 * //peut renvoyer l'exception TchatRoomNotFoundException
 	 * @param nom nom de la room
 	 */
-	public boolean isPrivateTchatRoom(String nom) {
-		// TODO - implement Client.isPrivateTchatRoom
-		throw new UnsupportedOperationException();
+	public boolean isPrivateTchatRoom(String nom) throws TchatRoomNotFoundException {
+                if(Math.random()<0.25){
+                    throw new TchatRoomNotFoundException();
+                }
+		return !nom.contains("public");
 	}
 
 	/**
@@ -64,9 +72,9 @@ public class Client {
 	 * @param nom nom de la salle
 	 * @param mdp mot de passe si priv� (sinon null ou vide)
 	 */
-	public TchatRoom createChatRoom(String nom, String mdp) {
+	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException  {
 		// TODO - implement Client.createChatRoom
-		throw new UnsupportedOperationException();
+		throw new TchatRoomAlreadyExistException();
 	}
 
 	/**
@@ -74,9 +82,9 @@ public class Client {
 	 * @param nom nom de la room
 	 * @param mdp mdp de la room
 	 */
-	public TchatRoom connectChatRoom(String nom, String mdp) {
+	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException {
 		// TODO - implement Client.connectChatRoom
-		throw new UnsupportedOperationException();
+		throw new TchatRoomNotFoundException();
 	}
 
 }

@@ -6,14 +6,11 @@
 package UIClient;
 
 import KernelClient.Client;
-import java.awt.Panel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import kernelServeur.MainServeur;
 
 /**
  *
@@ -23,16 +20,32 @@ public class MainFrame extends Application {
 
     private TabPane fenetre;
     private static Client c;
+    private UI_ExceptionDisplay exceptiondisplay;
+    private Tab_Tchat tchats;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //creation pop up exception
+        this.exceptiondisplay = new UI_ExceptionDisplay(primaryStage);
+        //demande de pseudo
+        UI_PseudoDialog pseudo = new UI_PseudoDialog(primaryStage,c,this);
+        pseudo.showAndWait();
+        
+        //creation de la fentre
        this.fenetre = new TabPane();
-       fenetre.getTabs().add(new Tab_HUB(c));
-       fenetre.getTabs().add(new Tab_Tchat(c));
+       tchats = new Tab_Tchat(c,this);
+       fenetre.getTabs().add(new Tab_HUB(c,this,primaryStage,tchats));
+       fenetre.getTabs().add(tchats);
        fenetre.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
        Scene scene = new Scene(fenetre, 900,600);
         primaryStage.setScene(scene);
         primaryStage.show(); 
+        
+        
+    }
+    
+    public void showException(Exception e){
+        exceptiondisplay.showException(e);
     }
     
      /**
@@ -42,5 +55,7 @@ public class MainFrame extends Application {
         c = new Client(/*args[0]*/"");
         launch(args);
     }
+    
+    
     
 }

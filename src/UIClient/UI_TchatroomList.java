@@ -6,22 +6,62 @@
 package UIClient;
 
 import java.util.Collection;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
  * @author Jeremy
  */
-public class UI_TchatroomList extends HBox {
+public class UI_TchatroomList extends ScrollPane {
     
-    public UI_TchatroomList(Collection<String> list){
-        this.updateRoomList(list);
+    /**
+     * La salle selectionné
+     */
+    private UI_RoomListItem current;
+    
+    private VBox list;
+    private Tab_HUB master;
+    
+    public UI_TchatroomList(Collection<String> listNom,Tab_HUB m){
+        
+        this.list = new VBox();
+        this.setContent(this.list);
+        current = null;
+        master = m;
+        
+        this.updateRoomList(listNom);
+        
+        this.setFitToHeight(true);
+        this.setFitToWidth(true);
     }
     
-    public void updateRoomList(Collection<String> list){
+    public void updateRoomList(Collection<String> listNom){
         this.getChildren().clear();
-        for(String a : list){
-            this.getChildren().add(new UI_RoomListItem(a));
+        for(String a : listNom){
+            this.list.getChildren().add(new UI_RoomListItem(a,this));
         }
+    }
+    
+    /**
+     * Permet de select la salle c
+     * @param c 
+     */
+    public void setCurrent(UI_RoomListItem c){
+        if(current != null){
+            current.setSelectedMode(false);
+        }
+        current = c;
+         if(current != null){
+            current.setSelectedMode(true);
+            master.showMdp(c.getRoomName());
+        }
+    }
+    
+    public String getCurrentRoomName(){
+        if(current != null){
+            return current.getRoomName();
+        }
+        return null;
     }
 }

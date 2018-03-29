@@ -6,8 +6,12 @@
 package UIClient;
 
 import KernelClient.Client;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import kernelServeur.TchatRoom;
 
 /**
  *
@@ -15,10 +19,24 @@ import javafx.scene.control.TabPane;
  */
 public class Tab_Tchat extends Tab{
     
-    public Tab_Tchat(Client c){
+    
+    private TabPane root;
+    private MainFrame m;
+    
+    
+    public Tab_Tchat(Client c, MainFrame m){
         super("Tchat");
-        TabPane root = new TabPane();
+        this.m = m;
+         root = new TabPane();
         this.setContent(root);
-        //root.getTabs().add(new Tab("er"));
+        //
+    }
+    
+    public void addTchat(TchatRoom t) {
+        try {
+            root.getTabs().add(new UI_Tchtroom(t));
+        } catch (RemoteException ex) {
+            m.showException(ex);
+        }
     }
 }
