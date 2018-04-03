@@ -1,18 +1,15 @@
 package kernelServeur;
 
 import KernelClient.*;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
 
-public class HUBImpl extends UnicastRemoteObject implements HUB {
+public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 
     
    
@@ -24,14 +21,14 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * l'identificateur des clients
 	 */
         
-        
 	private IdentificateurImpl identificater;
 
         
         
         //Rajouté par défaut
         public HUBImpl() throws RemoteException{
-            
+            this.TchatRooms = new HashMap<>(); 
+            this.identificater = new IdentificateurImpl(); 
         }
         
         
@@ -57,6 +54,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * @param id
 	 * @param listener
 	 */
+        @Override
 	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener){
 		// TODO - implement HUBImpl.connectionChatRoom
 		throw new UnsupportedOperationException();
@@ -70,6 +68,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * @param id
 	 * @param listener
 	 */
+        @Override
 	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener){
 		// TODO - implement HUBImpl.createChatRoom
 		throw new UnsupportedOperationException();
@@ -79,6 +78,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
+        @Override
 	public Collection<String> getAllChatRoom() throws RemoteException{
 		// TODO - implement HUBImpl.getAllChatRoom
 		return this.TchatRooms.keySet(); 
@@ -89,6 +89,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * Peut renvoyer une exception TchatroomNotFound
 	 * @param nom le nom de la chatroom a verifie
 	 */
+        @Override
 	public boolean isPrivate(String nom){
 		// TODO - implement HUBImpl.isPrivate
 		/*if(this.TchatRooms.containsValue(nom)){
@@ -113,6 +114,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * permet au client de liberer son pseudo
 	 * @param id identificateur du client
 	 */
+        @Override
 	public void disconnect(int id) throws PseudoNotFoundException{
             
             this.identificater.disconnect(id);

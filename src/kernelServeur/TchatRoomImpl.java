@@ -4,6 +4,7 @@ import kernelMsg.*;
 import KernelClient.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 
 /**
  * implementation de la tchatroom
@@ -14,10 +15,11 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 	 * le hub qui gere cette room
 	 */
 	private HUBImpl hub;
+        
 	/**
 	 * collection (pseudo,ListenerMsg)
 	 */
-	private int clients;
+	private HashMap<String, MsgListener> clients;
 	/**
 	 * la date de la derniere activit�
 	 * //Permet au hub de v�rifie si des channels on des personne qui on crash
@@ -69,8 +71,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * @throws java.rmi.RemoteException
 	 */
 	public void addClient(String pseudo, MsgListener listener){
-		// TODO - implement TchatRoomImpl.addClient
-		throw new UnsupportedOperationException();
+            this.clients.put(pseudo, listener); 
 	}
 
         /**
@@ -78,7 +79,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * @return 
          */
         public String getName() {
-            return name;
+            return this.name;
         }
 
         
