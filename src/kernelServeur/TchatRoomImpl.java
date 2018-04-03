@@ -34,10 +34,15 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * Le nom de la salle
          */
         private String name;
+        
+        private String mdp; 
 
         
-        public TchatRoomImpl() throws RemoteException{
-            
+        public TchatRoomImpl(String nom, String mdp, HUBImpl hub, IdentificateurImpl id) throws RemoteException{
+            this.name = nom; 
+            this.mdp = mdp; 
+            this.hub = hub;
+            this.identificateur = id; 
         }
         
 	/**
@@ -52,6 +57,17 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
 		throw new UnsupportedOperationException();
 	}
 
+        
+        public void connect(int id, MsgListener list, String mdp) throws PseudoNotFoundException, WrongPasswordException{
+            
+            if(!this.mdp.equals(mdp)){
+                throw new WrongPasswordException(); 
+            }
+            String pseudo = this.identificateur.getPseudo(id); 
+            addClient(pseudo, list);
+            
+        }
+        
 	/**
 	 * Permet de se deconnecter de la room
 	 * //Peut renvoyer l'exception PseudoNotFoundException
@@ -78,8 +94,13 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * Le nom de la salle
          * @return 
          */
+        @Override
         public String getName() {
             return this.name;
+        }
+        
+        public boolean isPrivate() {
+            return !this.mdp.equals(""); 
         }
 
         

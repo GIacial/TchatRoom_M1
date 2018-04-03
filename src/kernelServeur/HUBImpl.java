@@ -6,8 +6,13 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
+import kernelMsg.TchatRoomAlreadyExistException;
+import kernelMsg.TchatRoomNotFoundException;
+import kernelMsg.WrongPasswordException;
 
 public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 
@@ -16,7 +21,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	/**
 	 * Collection (Nom,Tchatroom) qui contient toutes les rooms existante
 	 */
-	private HashMap<String, String> TchatRooms;
+	private HashMap<String, TchatRoomImpl> TchatRooms;
 	/**
 	 * l'identificateur des clients
 	 */
@@ -55,9 +60,13 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 * @param listener
 	 */
         @Override
-	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener){
-		// TODO - implement HUBImpl.connectionChatRoom
-		throw new UnsupportedOperationException();
+	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException{
+            if(!this.TchatRooms.containsValue(nom)){ 
+                    throw new TchatRoomNotFoundException();
+            }
+            
+            this.TchatRooms.get(nom).connect(id, listener, password); 
+            return TchatRooms.get(nom); 
 	}
 
 	/**
@@ -67,11 +76,25 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 * @param mdp le mot de passe de la room (vide ou null => public)
 	 * @param id
 	 * @param listener
+         * @return 
+         * @throws kernelMsg.TchatRoomAlreadyExistException
 	 */
         @Override
-	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener){
-		// TODO - implement HUBImpl.createChatRoom
-		throw new UnsupportedOperationException();
+	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws TchatRoomAlreadyExistException{
+            if(this.TchatRooms.containsKey(nom)){
+                throw new TchatRoomAlreadyExistException();
+            }
+            
+            TchatRoomImpl tchatRoom = null; 
+            try { 
+                tchatRoom = new TchatRoomImpl(nom, mdp, this, this.identificater);
+            } catch (RemoteException ex) {
+                Logger.getLogger(HUBImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            this.TchatRooms.put(nom, tchatRoom); 
+            return tchatRoom; 
+            
 	}
 
 	/**
@@ -90,14 +113,11 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 * @param nom le nom de la chatroom a verifie
 	 */
         @Override
-	public boolean isPrivate(String nom){
-		// TODO - implement HUBImpl.isPrivate
-		/*if(this.TchatRooms.containsValue(nom)){
-                    return true; 
-                }else{
-                    //erreur 
-                }*/
-                return false; 
+	public boolean isPrivate(String nom) throws TchatRoomNotFoundException, RemoteException{
+		if(!this.TchatRooms.containsValue(nom)){ 
+                    throw new TchatRoomNotFoundException();
+                }
+                return this.TchatRooms.get(nom).isPrivate(); 
 	}
 
 	/**

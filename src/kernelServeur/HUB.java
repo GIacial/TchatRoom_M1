@@ -7,6 +7,9 @@ import java.rmi.RemoteException;
 import java.util.Collection;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
+import kernelMsg.TchatRoomAlreadyExistException;
+import kernelMsg.TchatRoomNotFoundException;
+import kernelMsg.WrongPasswordException;
 
 
 /**
@@ -34,7 +37,7 @@ public interface HUB extends Remote{
      * @return 
      * @throws java.rmi.RemoteException
 	 */
-	abstract TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws RemoteException;
+	abstract TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws RemoteException, TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException;
 
 	/**
 	 * Cr�� une chatRoom dans ce HUB
@@ -44,7 +47,7 @@ public interface HUB extends Remote{
 	 * @param id l'identificateur du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException;
+	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException, TchatRoomAlreadyExistException;
 
 	/**
 	 * //Renvoi une collection de nom de room donc collection de String
@@ -57,7 +60,7 @@ public interface HUB extends Remote{
 	 * Peut renvoyer une exception TchatRoomNotFoundException
 	 * @param nom le nom de la chatroom a verifie
 	 */
-	abstract boolean isPrivate(String nom)throws RemoteException;
+	abstract boolean isPrivate(String nom)throws RemoteException, TchatRoomNotFoundException;
 
 	/**
 	 * permet au client de liberer son pseudo

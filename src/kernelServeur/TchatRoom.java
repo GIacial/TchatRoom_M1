@@ -29,5 +29,7 @@ public interface TchatRoom extends Remote{
          * @throws RemoteException 
          */
         abstract public String getName()throws RemoteException;
+        
+        abstract public boolean isPrivate() throws RemoteException; 
 
 }
