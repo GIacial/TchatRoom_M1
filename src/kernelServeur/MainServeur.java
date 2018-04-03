@@ -17,10 +17,10 @@ public class MainServeur {
     public static final String factory_service = "TchatRoom_serveur_HUB";
     
     public static void main(String[] args){
-        HUB objserv = null;
+        HUBImpl objserv = null;
 
         try {
-
+            String setProperty = System.setProperty("java.rmi.server.hostname", "127.0.0.1");
             System.out.println("Creation de l'objet.");
             objserv = new HUBImpl();
             System.out.println("Enregistrement de l'objet.");

@@ -1,5 +1,6 @@
 package kernelServeur;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
@@ -7,7 +8,7 @@ import kernelMsg.PseudoNotFoundException;
 /**
  * l'indentificateur des utilisateur du serveur
  */
-public class IdentificateurImpl {
+public class IdentificateurImpl implements Serializable{
 
 	/**
 	 * Collection (id,Pseudo) des pseudo existant
