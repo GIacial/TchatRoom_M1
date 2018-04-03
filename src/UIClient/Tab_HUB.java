@@ -6,6 +6,7 @@
 package UIClient;
 
 import KernelClient.Client;
+import KernelClient.IC_Tchatroom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -68,7 +69,8 @@ public class Tab_HUB extends Tab {
                     try {
                         TchatRoom t = c.connectChatRoom(nameRoom, mdp.getText());
                         if(t != null){
-                            tchats.addTchat(t);
+                            IC_Tchatroom i = tchats.addTchat(t);
+                            c.setUI(t, i);
                         }
                     } catch (TchatRoomNotFoundException ex) {
                         m.showException(ex);

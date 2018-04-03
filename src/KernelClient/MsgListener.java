@@ -13,6 +13,6 @@ public interface MsgListener extends Remote{
 	 * @param InterfaceClient le panel qui affiche les msg de la tchatroom
          * @throws java.rmi.RemoteException
 	 */
-	abstract void recvMsg(IC_Tchatroom InterfaceClient) throws RemoteException;
+	abstract void recvMsg() throws RemoteException;
 
 }

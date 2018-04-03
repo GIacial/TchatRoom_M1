@@ -3,6 +3,7 @@ package KernelClient;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.TchatRoomAlreadyExistException;
 import kernelMsg.TchatRoomNotFoundException;
@@ -21,7 +22,7 @@ public class Client {
 	 * //stockage en collection
 	 * Tous les TchatRooms dont je fais parti
 	 */
-	private int mesTchats;
+	private HashMap<TchatRoom,MsgListenerImpl> mesTchats;
 	/**
 	 * le hub des room
 	 */
@@ -86,5 +87,11 @@ public class Client {
 		// TODO - implement Client.connectChatRoom
 		throw new TchatRoomNotFoundException();
 	}
+        
+        public void setUI(TchatRoom t , IC_Tchatroom i){
+            if(this.mesTchats.containsKey(t)){
+                this.mesTchats.get(t).setUI(i);
+            }
+        }
 
 }

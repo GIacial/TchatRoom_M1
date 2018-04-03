@@ -106,6 +106,7 @@ public class UI_RoomCreator extends Stage {
             TchatRoom t = c.createChatRoom(nom.getText(), mdp.getText());
             if(t != null){
                IC_Tchatroom i = tchats.addTchat(t);
+               c.setUI(t, i);
             }
              this.close();
         } catch (TchatRoomAlreadyExistException ex) {
