@@ -6,6 +6,9 @@
 package UIClient;
 
 import KernelClient.Client;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
@@ -51,7 +54,7 @@ public class MainFrame extends Application {
      /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {  
+    public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {  
         c = new Client(/*args[0]*/"");
         launch(args);
     }

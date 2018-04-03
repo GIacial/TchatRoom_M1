@@ -1,11 +1,15 @@
 package KernelClient;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import kernelMsg.AbstractMSG;
 import kernelMsg.PseudoNonLibreException;
+import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomAlreadyExistException;
 import kernelMsg.TchatRoomNotFoundException;
 import kernelServeur.*;
@@ -30,30 +34,25 @@ public class Client {
 	private HUB hub;
         
         
-        public Client(String adrSrv){
-            
+        public Client(String adrSrv) throws NotBoundException, MalformedURLException, RemoteException{
+            String url = "rmi://"+adrSrv+"/"+MainServeur.factory_service;
+            this.hub = (HUB)Naming.lookup(url);
+            this.mesTchats = new HashMap<>();
+            this.identificateur = 0;
         }
         
         
         public void connect(String pseudo) throws PseudoNonLibreException, RemoteException{
-           /* 
-            String id = this.hub.connexion(pseudo); 
-            this.Identificateur = id; */
-            if(pseudo.equalsIgnoreCase("")){
-                    throw new PseudoNonLibreException();
-                }
+          
+            int id = this.hub.connexion(pseudo); 
+            this.identificateur = id; 
         }
 
 	/**
 	 * //retourne une collection de String(nom des serveur)
 	 */
-	public Collection<String> getAllTchatRoomName() {
-		// TODO - implement Client.getAllTchatRoomName
-		//throw new UnsupportedOperationException();
-                Collection<String> r = new ArrayList<String>();
-                r.add("public TestRoom 1");
-                r.add("private TestRoom 2");
-                return r;
+	public Collection<String> getAllTchatRoomName() throws RemoteException {		
+                return this.hub.getAllChatRoom();
 	}
 
 	/**
@@ -61,11 +60,8 @@ public class Client {
 	 * //peut renvoyer l'exception TchatRoomNotFoundException
 	 * @param nom nom de la room
 	 */
-	public boolean isPrivateTchatRoom(String nom) throws TchatRoomNotFoundException {
-                if(Math.random()<0.25){
-                    throw new TchatRoomNotFoundException();
-                }
-		return !nom.contains("public");
+	public boolean isPrivateTchatRoom(String nom) throws TchatRoomNotFoundException, RemoteException {              
+		return this.hub.isPrivate(nom);
 	}
 
 	/**
@@ -74,9 +70,11 @@ public class Client {
 	 * @param nom nom de la salle
 	 * @param mdp mot de passe si priv� (sinon null ou vide)
 	 */
-	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException  {
-		// TODO - implement Client.createChatRoom
-		throw new TchatRoomAlreadyExistException();
+	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException, RemoteException  {
+                MsgListenerImpl listener = new MsgListenerImpl();
+		TchatRoom t = this.hub.createChatRoom(nom, mdp, identificateur, listener);
+                this.mesTchats.put(t, listener);
+                return t;
 	}
 
 	/**
@@ -84,9 +82,11 @@ public class Client {
 	 * @param nom nom de la room
 	 * @param mdp mdp de la room
 	 */
-	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException {
-		// TODO - implement Client.connectChatRoom
-		throw new TchatRoomNotFoundException();
+	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException, RemoteException {
+             MsgListenerImpl listener = new MsgListenerImpl();
+             TchatRoom t = this.hub.connectionChatRoom(nom, mdp, identificateur, listener);
+             this.mesTchats.put(t, listener);
+             return t;
 	}
         
         public void setUI(TchatRoom t , IC_Tchatroom i){
@@ -99,6 +99,18 @@ public class Client {
             if(this.mesTchats.containsKey(t)){
                 t.sendMsg(msg, identificateur);
             }
+        }
+        
+        public void disconnectFromTchatRoom(TchatRoom t) throws RemoteException{
+            if(this.mesTchats.containsKey(t)){
+                t.disconnect(identificateur);
+                this.mesTchats.remove(t);
+            }
+        }
+        
+        public void disconnect() throws RemoteException, PseudoNotFoundException{
+            this.hub.disconnect(identificateur);
+            this.identificateur = 0;                //0 la valeur de non connection
         }
 
 }

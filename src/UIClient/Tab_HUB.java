@@ -7,6 +7,7 @@ package UIClient;
 
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -38,7 +39,7 @@ public class Tab_HUB extends Tab {
     private MainFrame m;
     private UI_RoomCreator roomCreator;
     
-    public Tab_HUB (Client c,MainFrame m,Stage primaryStage,Tab_Tchat tchats){
+    public Tab_HUB (Client c,MainFrame m,Stage primaryStage,Tab_Tchat tchats) throws RemoteException{
         super("HUB");
         this.c = c;
         this.m = m;
@@ -72,7 +73,7 @@ public class Tab_HUB extends Tab {
                             IC_Tchatroom i = tchats.addTchat(t);
                             c.setUI(t, i);
                         }
-                    } catch (TchatRoomNotFoundException ex) {
+                    } catch (TchatRoomNotFoundException | RemoteException ex) {
                         m.showException(ex);
                     }
                 }
@@ -100,9 +101,10 @@ public class Tab_HUB extends Tab {
             else{
                 this.mdpBox.setVisible(false);
                 this.mdp.clear();
-                
+
             }
-        } catch (TchatRoomNotFoundException ex) {
+            
+        } catch (TchatRoomNotFoundException | RemoteException ex) {
            this.showException(ex);
         }
     }
