@@ -103,7 +103,6 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 */
         @Override
 	public Collection<String> getAllChatRoom() throws RemoteException{
-		// TODO - implement HUBImpl.getAllChatRoom
 		return this.TchatRooms.keySet(); 
 	}
 

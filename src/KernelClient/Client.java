@@ -12,6 +12,7 @@ import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomAlreadyExistException;
 import kernelMsg.TchatRoomNotFoundException;
+import kernelMsg.WrongPasswordException;
 import kernelServeur.*;
 
 /**
@@ -82,7 +83,7 @@ public class Client {
 	 * @param nom nom de la room
 	 * @param mdp mdp de la room
 	 */
-	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException, RemoteException {
+	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException, RemoteException, WrongPasswordException, PseudoNotFoundException {
              MsgListenerImpl listener = new MsgListenerImpl();
              TchatRoom t = this.hub.connectionChatRoom(nom, mdp, identificateur, listener);
              this.mesTchats.put(t, listener);

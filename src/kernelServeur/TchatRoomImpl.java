@@ -2,6 +2,7 @@ package kernelServeur;
 
 import kernelMsg.*;
 import KernelClient.*;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 /**
  * implementation de la tchatroom
  */
-public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
+public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Serializable {
 
 	/**
 	 * le hub qui gere cette room

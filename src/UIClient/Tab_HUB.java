@@ -22,7 +22,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomNotFoundException;
+import kernelMsg.WrongPasswordException;
 import kernelServeur.TchatRoom;
 
 /**
@@ -73,7 +75,7 @@ public class Tab_HUB extends Tab {
                             IC_Tchatroom i = tchats.addTchat(t);
                             c.setUI(t, i);
                         }
-                    } catch (TchatRoomNotFoundException | RemoteException ex) {
+                    } catch (TchatRoomNotFoundException | RemoteException | WrongPasswordException | PseudoNotFoundException ex) {
                         m.showException(ex);
                     }
                 }
