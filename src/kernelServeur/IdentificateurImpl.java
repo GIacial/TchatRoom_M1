@@ -14,6 +14,8 @@ public class IdentificateurImpl implements Serializable{
 	 * Collection (id,Pseudo) des pseudo existant
 	 */
 	private final HashMap<Integer,String> pseudos;
+        private final int coefMult = 1875;
+        private final int decal = 189;
         
         public IdentificateurImpl(){
             this.pseudos = new HashMap<Integer,String>();
@@ -31,7 +33,10 @@ public class IdentificateurImpl implements Serializable{
                 if(this.pseudos.containsValue(pseudo)){
                     throw new PseudoNonLibreException();
                 }
-		Integer key = (int)(pseudo.hashCode()*(Math.random()*1875+189));
+		Integer key = (int)(pseudo.hashCode()*(Math.random()*coefMult+decal));
+                while(this.pseudos.containsKey(key)){   //evite d'avoir 2 fois le meme
+                    key = (int)(pseudo.hashCode()*(Math.random()*coefMult+decal));
+                }
                 this.pseudos.put(key, pseudo);
                 return key;
 	}
