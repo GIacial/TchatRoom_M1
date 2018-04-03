@@ -8,8 +8,7 @@ package UIClient;
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -21,7 +20,6 @@ import javafx.scene.layout.VBox;
 import kernelMsg.AbstractMSG;
 import kernelMsg.MSG_Text;
 import kernelMsg.PseudoNotFoundException;
-import kernelMsg.TchatRoomNotFoundException;
 import kernelServeur.TchatRoom;
 
 /**
@@ -62,10 +60,21 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     }
     
     @Override
-    public void addMsg(AbstractMSG msg) {
-       UI_BulleMsg b = new UI_BulleMsg();
-       msg.affiche(b);
-       this.msg.getChildren().add(b);
+    public void addMsg(AbstractMSG msgs) {
+       
+       
+       Runnable treatment = new Runnable(){
+            @Override
+            public void run() {
+                UI_BulleMsg b = new UI_BulleMsg();
+                msgs.affiche(b);
+                msg.getChildren().add(b);
+            }
+            
+        };
+        
+        if(Platform.isFxApplicationThread()) treatment.run();
+        else Platform.runLater(treatment);
        
     }
     

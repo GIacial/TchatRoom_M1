@@ -59,8 +59,10 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
 	public void sendMsg(AbstractMSG msg, int id) throws PseudoNotFoundException,RemoteException{
             String pseudo = this.identificateur.getPseudo(id);
             msg.setAuteur(pseudo);
+            System.out.println("ok "+this.clients.values());
             for(MsgListener l : this.clients.values()){
                 l.recvMsg(msg);
+                System.err.println("renvoyer");
             }
           
 	}

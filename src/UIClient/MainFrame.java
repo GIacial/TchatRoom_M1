@@ -9,11 +9,15 @@ import KernelClient.Client;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Collection;
 import javafx.application.Application;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  *
@@ -25,6 +29,7 @@ public class MainFrame extends Application {
     private static Client c;
     private UI_ExceptionDisplay exceptiondisplay;
     private Tab_Tchat tchats;
+    private final int refreshRoom = 2000;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,12 +42,33 @@ public class MainFrame extends Application {
         //creation de la fentre
        this.fenetre = new TabPane();
        tchats = new Tab_Tchat(c,this);
-       fenetre.getTabs().add(new Tab_HUB(c,this,primaryStage,tchats));
+       Tab_HUB hub = new Tab_HUB(c,this,primaryStage,tchats);
+       fenetre.getTabs().add(hub);
        fenetre.getTabs().add(tchats);
        fenetre.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
        Scene scene = new Scene(fenetre, 900,600);
         primaryStage.setScene(scene);
         primaryStage.show(); 
+        
+        //tache de fond de mise à jour de la list
+        ScheduledService t  = new ScheduledService(){
+           @Override
+           protected Task createTask() {
+              return new Task() { 
+                  @Override
+                  protected Object call() throws Exception {
+                      hub.refreshListRoom();
+                      return null;
+                  }
+  
+                                      
+        };
+           }
+          
+       };
+       t.setDelay(Duration.millis(refreshRoom));//premier fois
+       t.setPeriod(Duration.millis(refreshRoom));//entre chaque
+       t.start();
         
         
     }
@@ -55,9 +81,12 @@ public class MainFrame extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {  
-        c = new Client(/*args[0]*/"");
+     c = new Client(/*args[0]*/"");
         launch(args);
     }
+
+    
+
     
     
     

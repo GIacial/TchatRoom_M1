@@ -47,7 +47,7 @@ public interface HUB extends Remote{
 	 * @param id l'identificateur du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException, TchatRoomAlreadyExistException;
+	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException, TchatRoomAlreadyExistException, WrongPasswordException, PseudoNotFoundException;
 
 	/**
 	 * //Renvoi une collection de nom de room donc collection de String

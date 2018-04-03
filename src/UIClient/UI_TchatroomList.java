@@ -11,8 +11,11 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  *
@@ -24,12 +27,12 @@ public class UI_TchatroomList extends ScrollPane {
      * La salle selectionné
      */
     private UI_RoomListItem current;
-    private final int refreshRoom = 1000;
     
     private VBox list;
     private Tab_HUB master;
-    
-    public UI_TchatroomList(Collection<String> listNom,Tab_HUB m,Client c){
+
+  
+    public  UI_TchatroomList(Collection<String> listNom,Tab_HUB m,Client c){
         
         this.list = new VBox();
         this.setContent(this.list);
@@ -37,16 +40,26 @@ public class UI_TchatroomList extends ScrollPane {
         master = m;
         
         this.updateRoomList(listNom);
+       //this.updaterRoomList(c);
         
         this.setFitToHeight(true);
         this.setFitToWidth(true);
     }
     
     public void updateRoomList(Collection<String> listNom){
-        this.list.getChildren().clear();
-        for(String a : listNom){
-            this.list.getChildren().add(new UI_RoomListItem(a,this));
-        }
+        Runnable treatment = new Runnable(){
+            @Override
+            public void run() {
+                list.getChildren().clear();
+                for(String a : listNom){
+                    list.getChildren().add(new UI_RoomListItem(a,UI_TchatroomList.this));
+                }
+            }
+            
+        };
+        
+        if(Platform.isFxApplicationThread()) treatment.run();
+        else Platform.runLater(treatment);
     }
     
     /**
@@ -72,5 +85,5 @@ public class UI_TchatroomList extends ScrollPane {
     }
     
     
-   
+ 
 }

@@ -81,7 +81,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
          * @throws kernelMsg.TchatRoomAlreadyExistException
 	 */
         @Override
-	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws TchatRoomAlreadyExistException{
+	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws TchatRoomAlreadyExistException, WrongPasswordException, PseudoNotFoundException{
             if(this.TchatRooms.containsKey(nom)){
                 throw new TchatRoomAlreadyExistException();
             }
@@ -94,6 +94,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
             }
             
             this.TchatRooms.put(nom, tchatRoom); 
+            this.TchatRooms.get(nom).connect(id, listener, mdp); 
             return tchatRoom; 
             
 	}

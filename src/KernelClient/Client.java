@@ -71,7 +71,7 @@ public class Client {
 	 * @param nom nom de la salle
 	 * @param mdp mot de passe si priv� (sinon null ou vide)
 	 */
-	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException, RemoteException  {
+	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException, RemoteException, WrongPasswordException, PseudoNotFoundException  {
                 MsgListenerImpl listener = new MsgListenerImpl();
 		TchatRoom t = this.hub.createChatRoom(nom, mdp, identificateur, listener);
                 this.mesTchats.put(t, listener);
@@ -99,6 +99,7 @@ public class Client {
         public void sendMsg(TchatRoom t, AbstractMSG msg) throws RemoteException, PseudoNotFoundException{
             if(this.mesTchats.containsKey(t)){
                 t.sendMsg(msg, identificateur);
+                System.err.println("Envoyer");
             }
         }
         

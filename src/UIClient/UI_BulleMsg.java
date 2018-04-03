@@ -22,6 +22,7 @@ public class UI_BulleMsg extends HBox implements IC_BulleMsg {
     @Override
     public void addItem(Node element) {       
         this.getChildren().add(element);
+        
     }
     
 }
