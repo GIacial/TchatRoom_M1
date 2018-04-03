@@ -3,7 +3,10 @@ package kernelServeur;
 import KernelClient.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kernelMsg.PseudoNonLibreException;
@@ -41,7 +44,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
          * @throws kernelMsg.PseudoNonLibreException
 	 */
         @Override
-	public String connexion(String pseudo) throws PseudoNonLibreException{
+	public int connexion(String pseudo) throws PseudoNonLibreException{
                 return this.identificater.connexion(pseudo); 
                 
 	}
@@ -54,7 +57,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * @param id
 	 * @param listener
 	 */
-	public TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener){
+	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener){
 		// TODO - implement HUBImpl.connectionChatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -67,7 +70,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * @param id
 	 * @param listener
 	 */
-	public TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener){
+	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener){
 		// TODO - implement HUBImpl.createChatRoom
 		throw new UnsupportedOperationException();
 	}
@@ -76,9 +79,9 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
-	public HashMap<String, String> getAllChatRoom() throws RemoteException{
+	public Collection<String> getAllChatRoom() throws RemoteException{
 		// TODO - implement HUBImpl.getAllChatRoom
-		return this.TchatRooms; 
+		return this.TchatRooms.keySet(); 
 	}
 
 	/**
@@ -110,7 +113,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB {
 	 * permet au client de liberer son pseudo
 	 * @param id identificateur du client
 	 */
-	public void disconnect(String id) throws PseudoNotFoundException{
+	public void disconnect(int id) throws PseudoNotFoundException{
             
             this.identificater.disconnect(id);
           

@@ -12,10 +12,10 @@ public class IdentificateurImpl {
 	/**
 	 * Collection (id,Pseudo) des pseudo existant
 	 */
-	private final HashMap<String,String> pseudos;
+	private final HashMap<Integer,String> pseudos;
         
         public IdentificateurImpl(){
-            this.pseudos = new HashMap<String,String>();
+            this.pseudos = new HashMap<Integer,String>();
         }
 
 	/**
@@ -26,11 +26,11 @@ public class IdentificateurImpl {
          * @return 
          * @throws kernelMsg.PseudoNonLibreException
 	 */
-	synchronized public String connexion(String pseudo) throws PseudoNonLibreException{
+	synchronized public int connexion(String pseudo) throws PseudoNonLibreException{
                 if(this.pseudos.containsValue(pseudo)){
                     throw new PseudoNonLibreException();
                 }
-		String key = ""+pseudo.hashCode();
+		Integer key = pseudo.hashCode();
                 this.pseudos.put(key, pseudo);
                 return key;
 	}
@@ -41,7 +41,7 @@ public class IdentificateurImpl {
 	 * @param id l'identificateur du clinet
          * @throws kernelMsg.PseudoNotFoundException
 	 */
-	synchronized public void disconnect(String id) throws PseudoNotFoundException {
+	synchronized public void disconnect(int id) throws PseudoNotFoundException {
 		if(!this.pseudos.containsKey(id)){
                     throw new PseudoNotFoundException();
                 }
@@ -53,7 +53,7 @@ public class IdentificateurImpl {
 	 * @param id identificateur du client
          * @throws kernelMsg.PseudoNotFoundException
 	 */
-	 public String getPseudo(String id)throws PseudoNotFoundException {
+	 public String getPseudo(int id)throws PseudoNotFoundException {
 		if(!this.pseudos.containsKey(id)){
                     throw new PseudoNotFoundException();
                 }

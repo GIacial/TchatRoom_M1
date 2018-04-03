@@ -14,14 +14,14 @@ public interface TchatRoom extends Remote{
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param msg un msg
 	 */
-	abstract void sendMsg(AbstractMSG msg) throws RemoteException;
+	abstract void sendMsg(AbstractMSG msg , int id) throws RemoteException;
 
 	/**
 	 * Permet de se deconnecter de la room
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param id l'identifiant du client
 	 */
-	abstract void disconnect(String id) throws RemoteException;
+	abstract void disconnect(int id) throws RemoteException;
         
         /**
          * Donne le nom de la salle

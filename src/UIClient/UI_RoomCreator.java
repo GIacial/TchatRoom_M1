@@ -6,6 +6,7 @@
 package UIClient;
 
 import KernelClient.Client;
+import KernelClient.IC_Tchatroom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -104,7 +105,7 @@ public class UI_RoomCreator extends Stage {
             }
             TchatRoom t = c.createChatRoom(nom.getText(), mdp.getText());
             if(t != null){
-                tchats.addTchat(t);
+               IC_Tchatroom i = tchats.addTchat(t);
             }
              this.close();
         } catch (TchatRoomAlreadyExistException ex) {

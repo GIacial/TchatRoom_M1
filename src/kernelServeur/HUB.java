@@ -4,7 +4,9 @@ import KernelClient.*;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
 
@@ -22,7 +24,7 @@ public interface HUB extends Remote{
 	 * Peut renvoyer l'exception PseudoNonLibreException
 	 * @param pseudo le pseudo
 	 */
-	abstract String connexion(String pseudo) throws RemoteException, PseudoNonLibreException;
+	abstract int connexion(String pseudo) throws RemoteException, PseudoNonLibreException;
 
 	/**
 	 * Ce connecter � une tchatRoom
@@ -31,8 +33,10 @@ public interface HUB extends Remote{
 	 * @param password le mot de passe de la room
 	 * @param id identifiant du client
 	 * @param listener le moyen de joindre le client
+     * @return 
+     * @throws java.rmi.RemoteException
 	 */
-	abstract TchatRoom connectionChatRoom(String nom, String password, String id, MsgListener listener) throws RemoteException;
+	abstract TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws RemoteException;
 
 	/**
 	 * Cr�� une chatRoom dans ce HUB
@@ -42,13 +46,13 @@ public interface HUB extends Remote{
 	 * @param id l'identificateur du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom createChatRoom(String nom, String mdp, String id, MsgListener listener) throws RemoteException;
+	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException;
 
 	/**
 	 * //Renvoi une collection de nom de room donc collection de String
 	 * Donne tous les noms des room
 	 */
-	abstract HashMap<String, String> getAllChatRoom() throws RemoteException;
+	abstract Collection<String> getAllChatRoom() throws RemoteException;
 
 	/**
 	 * Dis si la room est priv�e
@@ -62,6 +66,6 @@ public interface HUB extends Remote{
 	 * Peut lancer une exception PseudoNotFoundException
 	 * @param id identificateur du client
 	 */
-	abstract void disconnect(String id)throws RemoteException, PseudoNotFoundException;
+	abstract void disconnect(int id)throws RemoteException, PseudoNotFoundException;
 
 }

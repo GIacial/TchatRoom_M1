@@ -45,7 +45,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * @throws java.rmi.RemoteException
 	 */
         @Override
-	public void sendMsg(AbstractMSG msg){
+	public void sendMsg(AbstractMSG msg, int id){
 		// TODO - implement TchatRoomImpl.sendMsg
 		throw new UnsupportedOperationException();
 	}
@@ -57,7 +57,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom {
          * @throws java.rmi.RemoteException
 	 */
         @Override
-	public void disconnect(String id){
+	public void disconnect(int id){
 		// TODO - implement TchatRoomImpl.disconnect
 		throw new UnsupportedOperationException();
 	}

@@ -6,6 +6,7 @@
 package UIClient;
 
 import KernelClient.Client;
+import KernelClient.IC_Tchatroom;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,11 +33,14 @@ public class Tab_Tchat extends Tab{
         //
     }
     
-    public void addTchat(TchatRoom t) {
+    public IC_Tchatroom addTchat(TchatRoom t) {
+        UI_Tchtroom r = null;
         try {
-            root.getTabs().add(new UI_Tchtroom(t));
+            r  = new UI_Tchtroom(t);
+            root.getTabs().add(r);
         } catch (RemoteException ex) {
             m.showException(ex);
         }
+        return r;
     }
 }
