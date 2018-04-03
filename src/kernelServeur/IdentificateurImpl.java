@@ -31,7 +31,7 @@ public class IdentificateurImpl implements Serializable{
                 if(this.pseudos.containsValue(pseudo)){
                     throw new PseudoNonLibreException();
                 }
-		Integer key = pseudo.hashCode();
+		Integer key = (int)(pseudo.hashCode()*(Math.random()*1875+189));
                 this.pseudos.put(key, pseudo);
                 return key;
 	}
