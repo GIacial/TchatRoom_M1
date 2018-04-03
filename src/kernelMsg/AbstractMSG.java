@@ -1,9 +1,11 @@
 package kernelMsg;
 
+import java.io.Serializable;
+
 /**
  * La classe abstraite des messages
  */
-public abstract class AbstractMSG {
+public abstract class AbstractMSG implements Serializable {
 
 	/**
 	 * le pseudo du destinataire
@@ -18,10 +20,6 @@ public abstract class AbstractMSG {
 	 */
 	private String auteur;
         
-        /**
-         * id de l'auteur
-         */
-        private int idAuteur;
 
 	public String getDestinataire() {
 		return this.destinataire;
@@ -35,15 +33,7 @@ public abstract class AbstractMSG {
 		this.auteur = auteur;
 	}
         
-        /**
-         * lis et supprime id de l'auteur
-         * @return 
-         */
-        public int getIdAuteur(){
-            int t = this.idAuteur;
-            this.idAuteur = 0 ;
-            return t;
-        }
+
 
 	/**
 	 * Mets le contenu du msg dans la bulle Graphique

@@ -47,7 +47,7 @@ public class Tab_HUB extends Tab {
         this.m = m;
         this.roomCreator = new UI_RoomCreator(primaryStage,c,m,tchats);
         BorderPane grid = new BorderPane();
-        this.list = new UI_TchatroomList(c.getAllTchatRoomName(),this);
+        this.list = new UI_TchatroomList(c.getAllTchatRoomName(),this,c);
         this.mdp = new TextField();
         this.mdpLabel = new Label("Mot de passe");
         this.mdpLabel.setAlignment(Pos.CENTER);

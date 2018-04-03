@@ -4,6 +4,7 @@ import KernelClient.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -61,7 +62,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 */
         @Override
 	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException{
-            if(!this.TchatRooms.containsValue(nom)){ 
+            if(!this.TchatRooms.containsKey(nom)){ 
                     throw new TchatRoomNotFoundException();
             }
             
@@ -103,7 +104,11 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 */
         @Override
 	public Collection<String> getAllChatRoom() throws RemoteException{
-		return this.TchatRooms.keySet(); 
+                ArrayList<String> r = new ArrayList<>();    //cause keySet not Serializable
+                for(String t:this.TchatRooms.keySet()){
+                    r.add(t);
+                }
+		return r; 
 	}
 
 	/**
@@ -113,7 +118,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 */
         @Override
 	public boolean isPrivate(String nom) throws TchatRoomNotFoundException, RemoteException{
-		if(!this.TchatRooms.containsValue(nom)){ 
+		if(!this.TchatRooms.containsKey(nom)){ 
                     throw new TchatRoomNotFoundException();
                 }
                 return this.TchatRooms.get(nom).isPrivate(); 

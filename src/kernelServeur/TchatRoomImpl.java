@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * implementation de la tchatroom
@@ -44,6 +46,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
             this.mdp = mdp; 
             this.hub = hub;
             this.identificateur = id; 
+            this.clients = new HashMap<>();
         }
         
 	/**
@@ -53,9 +56,13 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
          * @throws java.rmi.RemoteException
 	 */
         @Override
-	public void sendMsg(AbstractMSG msg, int id){
-		// TODO - implement TchatRoomImpl.sendMsg
-		throw new UnsupportedOperationException();
+	public void sendMsg(AbstractMSG msg, int id) throws PseudoNotFoundException,RemoteException{
+            String pseudo = this.identificateur.getPseudo(id);
+            msg.setAuteur(pseudo);
+            for(MsgListener l : this.clients.values()){
+                l.recvMsg(msg);
+            }
+          
 	}
 
         

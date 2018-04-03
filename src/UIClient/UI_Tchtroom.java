@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import kernelMsg.AbstractMSG;
 import kernelMsg.MSG_Text;
+import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomNotFoundException;
 import kernelServeur.TchatRoom;
 
@@ -68,11 +69,11 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
        
     }
     
-    private void sendMsgText(){    
+    private void sendMsgText() {    
         try {
             MSG_Text msgObject = new MSG_Text(msgEditor.getText());
             c.sendMsg(room, msgObject);
-        } catch (RemoteException ex) {
+        } catch (RemoteException|PseudoNotFoundException ex) {
             m.showException(ex);
         }
     }

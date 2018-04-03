@@ -5,7 +5,12 @@
  */
 package UIClient;
 
+import KernelClient.Client;
+import java.rmi.RemoteException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
@@ -19,11 +24,12 @@ public class UI_TchatroomList extends ScrollPane {
      * La salle selectionné
      */
     private UI_RoomListItem current;
+    private final int refreshRoom = 1000;
     
     private VBox list;
     private Tab_HUB master;
     
-    public UI_TchatroomList(Collection<String> listNom,Tab_HUB m){
+    public UI_TchatroomList(Collection<String> listNom,Tab_HUB m,Client c){
         
         this.list = new VBox();
         this.setContent(this.list);
@@ -37,7 +43,7 @@ public class UI_TchatroomList extends ScrollPane {
     }
     
     public void updateRoomList(Collection<String> listNom){
-        this.getChildren().clear();
+        this.list.getChildren().clear();
         for(String a : listNom){
             this.list.getChildren().add(new UI_RoomListItem(a,this));
         }
@@ -64,4 +70,7 @@ public class UI_TchatroomList extends ScrollPane {
         }
         return null;
     }
+    
+    
+   
 }

@@ -14,7 +14,7 @@ public interface TchatRoom extends Remote{
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param msg un msg
 	 */
-	abstract void sendMsg(AbstractMSG msg , int id) throws RemoteException;
+	abstract void sendMsg(AbstractMSG msg , int id) throws RemoteException,PseudoNotFoundException;
 
 	/**
 	 * Permet de se deconnecter de la room

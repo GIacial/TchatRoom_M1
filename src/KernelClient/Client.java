@@ -96,7 +96,7 @@ public class Client {
             }
         }
         
-        public void sendMsg(TchatRoom t, AbstractMSG msg) throws RemoteException{
+        public void sendMsg(TchatRoom t, AbstractMSG msg) throws RemoteException, PseudoNotFoundException{
             if(this.mesTchats.containsKey(t)){
                 t.sendMsg(msg, identificateur);
             }
