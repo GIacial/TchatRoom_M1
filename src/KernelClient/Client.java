@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import kernelMsg.AbstractMSG;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.TchatRoomAlreadyExistException;
 import kernelMsg.TchatRoomNotFoundException;
@@ -17,7 +18,7 @@ public class Client {
 	/**
 	 * Identificateur r�cup�r� apr�s la connection
 	 */
-	private String Identificateur;
+	private int identificateur;
 	/**
 	 * //stockage en collection
 	 * Tous les TchatRooms dont je fais parti
@@ -91,6 +92,12 @@ public class Client {
         public void setUI(TchatRoom t , IC_Tchatroom i){
             if(this.mesTchats.containsKey(t)){
                 this.mesTchats.get(t).setUI(i);
+            }
+        }
+        
+        public void sendMsg(TchatRoom t, AbstractMSG msg) throws RemoteException{
+            if(this.mesTchats.containsKey(t)){
+                t.sendMsg(msg, identificateur);
             }
         }
 

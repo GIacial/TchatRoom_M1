@@ -23,16 +23,15 @@ public class MsgListenerImpl extends UnicastRemoteObject implements MsgListener 
 	 */
         @Override
 	public void recvMsg(AbstractMSG msg){
-		// TODO - implement MsgListenerImpl.recvMsg
-		throw new UnsupportedOperationException();
+		this.interfaceTchatroom.addMsg(msg);
 	}
         
         /**
          * associe UI au listener
          * @param InterfaceClient 
          */
-        public void setUI(IC_Tchatroom InterfaceClient){
-            
+        public void setUI(IC_Tchatroom interfaceClient){
+            this.interfaceTchatroom = interfaceClient;
         }
 
 }

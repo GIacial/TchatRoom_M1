@@ -23,11 +23,13 @@ public class Tab_Tchat extends Tab{
     
     private TabPane root;
     private MainFrame m;
+    private Client c;
     
     
     public Tab_Tchat(Client c, MainFrame m){
         super("Tchat");
         this.m = m;
+        this.c = c;
          root = new TabPane();
         this.setContent(root);
         //
@@ -36,7 +38,7 @@ public class Tab_Tchat extends Tab{
     public IC_Tchatroom addTchat(TchatRoom t) {
         UI_Tchtroom r = null;
         try {
-            r  = new UI_Tchtroom(t);
+            r  = new UI_Tchtroom(t,c,m);
             root.getTabs().add(r);
         } catch (RemoteException ex) {
             m.showException(ex);
