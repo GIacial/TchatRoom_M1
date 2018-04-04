@@ -39,11 +39,13 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     private MainFrame m;
     private ComboBox pseudoChoice;
     private static final int refreshPseudo = 10000;
+    private boolean actif;
 
     public UI_Tchtroom(TchatRoom room , Client c,MainFrame m) throws RemoteException{
         super(room.getName());
         this.c = c;
         this.m = m;
+        this.actif = true;
         this.room = room;
         this.msg = new VBox();
         BorderPane layout = new BorderPane();
@@ -73,6 +75,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
             public void handle(Event event) {
                 try {
                     c.disconnectFromTchatRoom(room);
+                    actif = false;
                 } catch (RemoteException |PseudoNotFoundException ex) {
                     m.showException(ex);
                 }
@@ -142,12 +145,13 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
             @Override
             public void run() {
                 boolean ok = true;
-                while(ok && MainFrame.onRun){
+                while(ok && actif){
                     try {
                         updatePseudoList();
                         Thread.sleep(refreshPseudo);
                     } catch (InterruptedException ex) {
                        m.showException(ex);
+                       ok = false;
                     }
                 }
             }
