@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +37,8 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     private Client c;
     private TchatRoom room;
     private MainFrame m;
+    private ComboBox pseudoChoice;
+    private static final int refreshPseudo = 10000;
 
     public UI_Tchtroom(TchatRoom room , Client c,MainFrame m) throws RemoteException{
         super(room.getName());
@@ -47,7 +50,12 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         HBox bottom = new HBox();
         msgEditor = new TextField();
         Button sendButton = new Button("Envoyer");
-        bottom.getChildren().addAll(msgEditor,sendButton);
+         pseudoChoice = new ComboBox();
+         this.createUpdaterPseudoList();
+        
+        bottom.getChildren().addAll(msgEditor,sendButton,pseudoChoice);
+        
+        
         layout.setCenter(msg);
         layout.setBottom(bottom);
         this.setContent(layout);
@@ -94,12 +102,58 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     
     private void sendMsgText() {    
         try {
-            MSG_Text msgObject = new MSG_Text(msgEditor.getText());
+            String choix = (String) pseudoChoice.getValue();
+            if(choix == null){
+                choix = "";
+                System.err.println("Pas encore le pseudo selectionné");
+            }
+            MSG_Text msgObject = new MSG_Text(msgEditor.getText(),choix);
             msgEditor.setText("");
             c.sendMsg(room, msgObject);
         } catch (RemoteException|PseudoNotFoundException ex) {
             m.showException(ex);
         }
+    }
+    
+    private void updatePseudoList(){
+        Runnable treatment = new Runnable(){
+            @Override
+            public void run() {
+                String choix = (String) pseudoChoice.getValue();
+                pseudoChoice.getItems().clear();
+                try {
+                    pseudoChoice.getItems().add("");
+                    pseudoChoice.getItems().addAll(room.getAllPseudo());
+                    pseudoChoice.getSelectionModel().select(choix);
+                } catch (RemoteException ex) {
+                    m.showException(ex);
+                }
+                
+            }
+            
+        };
+        
+        if(Platform.isFxApplicationThread()) treatment.run();
+        else Platform.runLater(treatment);
+    }
+    
+    private void createUpdaterPseudoList(){
+         Thread t = new Thread(){
+            @Override
+            public void run() {
+                boolean ok = true;
+                while(ok && MainFrame.onRun){
+                    try {
+                        updatePseudoList();
+                        Thread.sleep(refreshPseudo);
+                    } catch (InterruptedException ex) {
+                       m.showException(ex);
+                    }
+                }
+            }
+            
+        };
+        t.start();
     }
     
 }

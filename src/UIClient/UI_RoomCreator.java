@@ -7,6 +7,7 @@ package UIClient;
 
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -25,8 +26,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import kernelMsg.AlreadyConnectException;
 import kernelMsg.PseudoNonLibreException;
+import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomAlreadyExistException;
+import kernelMsg.WrongPasswordException;
 import kernelServeur.TchatRoom;
 
 /**
@@ -114,7 +118,7 @@ public class UI_RoomCreator extends Stage {
         } catch (TchatRoomAlreadyExistException ex) {
             exception.setText("Le nom de cette salle est déjà pris par une autre");
         }
-        catch(Exception ex){
+        catch(RemoteException | WrongPasswordException | PseudoNotFoundException | AlreadyConnectException ex){
             m.showException(ex);
         }
            

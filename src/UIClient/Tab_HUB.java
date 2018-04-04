@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import kernelMsg.AlreadyConnectException;
 import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomNotFoundException;
 import kernelMsg.WrongPasswordException;
@@ -72,7 +73,7 @@ public class Tab_HUB extends Tab {
                             c.setUI(t, i);
                             m.goTchatOnglet();
                         }
-                    } catch (TchatRoomNotFoundException | RemoteException | WrongPasswordException | PseudoNotFoundException ex) {
+                    } catch (TchatRoomNotFoundException | RemoteException | WrongPasswordException | PseudoNotFoundException | AlreadyConnectException ex) {
                         m.showException(ex);
                     }
                 }

@@ -97,7 +97,7 @@ public class UI_TchatroomList extends ScrollPane {
             @Override
             public void run() {
                 boolean ok = true;
-                while(ok){
+                while(ok && MainFrame.onRun){
                     try {
                         updateRoomList(c.getAllTchatRoomName());
                         Thread.sleep(refreshRoom);
