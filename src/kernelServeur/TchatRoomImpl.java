@@ -5,6 +5,8 @@ import KernelClient.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,20 +61,32 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
 	public void sendMsg(AbstractMSG msg, int id) throws PseudoNotFoundException,RemoteException{
             String pseudo = this.identificateur.getPseudo(id);
             msg.setAuteur(pseudo);
-            for(MsgListener l : this.clients.values()){
+            if(msg.getDestinataire().equals("")){
+              for(MsgListener l : this.clients.values()){
                 l.recvMsg(msg);
                 
+                }  
             }
+            else{
+                MsgListener l = this.clients.get(msg.getDestinataire());
+                if(l != null){
+                    l.recvMsg(msg);
+                }
+            }
+            
           
 	}
 
         
-        public void connect(int id, MsgListener list, String mdp) throws PseudoNotFoundException, WrongPasswordException{
-            
+        public void connect(int id, MsgListener list, String mdp) throws PseudoNotFoundException, WrongPasswordException,AlreadyConnectException{
+            String pseudo = this.identificateur.getPseudo(id); 
+            if(this.clients.containsKey(pseudo)){
+                throw new AlreadyConnectException();
+            }
             if(!this.mdp.equals(mdp)){
                 throw new WrongPasswordException(); 
             }
-            String pseudo = this.identificateur.getPseudo(id); 
+            
             addClient(pseudo, list);
             welcomeMsg(pseudo," a rejoint la salle");
             
@@ -101,6 +115,9 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
             String pseudo = this.identificateur.getPseudo(id);
             this.clients.remove(pseudo);
             welcomeMsg(pseudo," a quitté la salle");
+            if(this.clients.isEmpty()){
+                this.hub.removeRoom(this);
+            }
 	}
 
 	/**
@@ -126,5 +143,12 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
             return !this.mdp.equals(""); 
         }
 
-        
+        @Override
+        public Collection<String> getAllPseudo(){
+            ArrayList<String> r = new ArrayList<>();
+            for(String n : this.clients.keySet()){
+                r.add(n);
+            }
+            return r;
+        }
 }

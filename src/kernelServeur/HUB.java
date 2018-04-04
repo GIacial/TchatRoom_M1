@@ -5,6 +5,7 @@ import KernelClient.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Collection;
+import kernelMsg.AlreadyConnectException;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomAlreadyExistException;
@@ -37,7 +38,7 @@ public interface HUB extends Remote{
      * @return 
      * @throws java.rmi.RemoteException
 	 */
-	abstract TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws RemoteException, TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException;
+	abstract TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws RemoteException, TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException,AlreadyConnectException;
 
 	/**
 	 * Cr�� une chatRoom dans ce HUB
@@ -47,7 +48,7 @@ public interface HUB extends Remote{
 	 * @param id l'identificateur du client
 	 * @param listener le moyen de joindre le client
 	 */
-	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException, TchatRoomAlreadyExistException, WrongPasswordException, PseudoNotFoundException;
+	abstract TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws RemoteException, TchatRoomAlreadyExistException, WrongPasswordException, PseudoNotFoundException,AlreadyConnectException;
 
 	/**
 	 * //Renvoi une collection de nom de room donc collection de String

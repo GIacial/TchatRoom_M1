@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import kernelMsg.AlreadyConnectException;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomAlreadyExistException;
@@ -61,7 +62,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 * @param listener
 	 */
         @Override
-	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException{
+	public TchatRoom connectionChatRoom(String nom, String password, int id, MsgListener listener) throws TchatRoomNotFoundException, WrongPasswordException, PseudoNotFoundException, AlreadyConnectException{
             if(!this.TchatRooms.containsKey(nom)){ 
                     throw new TchatRoomNotFoundException();
             }
@@ -81,7 +82,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
          * @throws kernelMsg.TchatRoomAlreadyExistException
 	 */
         @Override
-	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws TchatRoomAlreadyExistException, WrongPasswordException, PseudoNotFoundException{
+	public TchatRoom createChatRoom(String nom, String mdp, int id, MsgListener listener) throws TchatRoomAlreadyExistException, WrongPasswordException, PseudoNotFoundException, AlreadyConnectException{
             if(this.TchatRooms.containsKey(nom)){
                 throw new TchatRoomAlreadyExistException();
             }
@@ -130,9 +131,9 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 * Peut renvoyer (mais normalement pas) l'exception TchatRoomNotFoundException
 	 * @param room la room
 	 */
-	public void removeRoom(TchatRoom room){
-		// TODO - implement HUBImpl.removeRoom
-		throw new UnsupportedOperationException();
+	public void removeRoom(TchatRoom room) throws RemoteException{
+            
+		this.TchatRooms.remove(room.getName());
 	}
 
 	/**
@@ -142,6 +143,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
         @Override
 	public void disconnect(int id) throws PseudoNotFoundException{
             
+            System.err.println("Deconnexion de "+this.identificater.getPseudo(id));
             this.identificater.disconnect(id);
           
 	}

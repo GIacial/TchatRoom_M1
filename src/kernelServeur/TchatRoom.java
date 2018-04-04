@@ -2,6 +2,7 @@ package kernelServeur;
 
 import java.rmi.RemoteException;
 import java.rmi.Remote;
+import java.util.Collection;
 import kernelMsg.*;
 
 /**
@@ -31,5 +32,7 @@ public interface TchatRoom extends Remote{
         abstract public String getName()throws RemoteException;
         
         abstract public boolean isPrivate() throws RemoteException; 
+        
+        abstract public Collection<String> getAllPseudo()throws RemoteException; 
 
 }
