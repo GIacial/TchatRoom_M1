@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import kernelMsg.AbstractMSG;
@@ -99,11 +98,10 @@ public class Client {
         public void sendMsg(TchatRoom t, AbstractMSG msg) throws RemoteException, PseudoNotFoundException{
             if(this.mesTchats.containsKey(t)){
                 t.sendMsg(msg, identificateur);
-                System.err.println("Envoyer");
             }
         }
         
-        public void disconnectFromTchatRoom(TchatRoom t) throws RemoteException{
+        public void disconnectFromTchatRoom(TchatRoom t) throws RemoteException, PseudoNotFoundException{
             if(this.mesTchats.containsKey(t)){
                 t.disconnect(identificateur);
                 this.mesTchats.remove(t);

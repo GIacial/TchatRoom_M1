@@ -59,10 +59,9 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
 	public void sendMsg(AbstractMSG msg, int id) throws PseudoNotFoundException,RemoteException{
             String pseudo = this.identificateur.getPseudo(id);
             msg.setAuteur(pseudo);
-            System.out.println("ok "+this.clients.values());
             for(MsgListener l : this.clients.values()){
                 l.recvMsg(msg);
-                System.err.println("renvoyer");
+                
             }
           
 	}
@@ -75,7 +74,20 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
             }
             String pseudo = this.identificateur.getPseudo(id); 
             addClient(pseudo, list);
+            welcomeMsg(pseudo," a rejoint la salle");
             
+        }
+        
+        private void welcomeMsg(String pseudo, String message){
+            MSG_Text msg = new MSG_Text(pseudo+ message);
+            for(MsgListener l : this.clients.values()){
+                try {
+                    l.recvMsg(msg);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(TchatRoomImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
         }
         
 	/**
@@ -85,9 +97,10 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
          * @throws java.rmi.RemoteException
 	 */
         @Override
-	public void disconnect(int id){
-		// TODO - implement TchatRoomImpl.disconnect
-		throw new UnsupportedOperationException();
+	public void disconnect(int id)throws PseudoNotFoundException,RemoteException{
+            String pseudo = this.identificateur.getPseudo(id);
+            this.clients.remove(pseudo);
+            welcomeMsg(pseudo," a quitté la salle");
 	}
 
 	/**

@@ -29,7 +29,6 @@ public class MainFrame extends Application {
     private static Client c;
     private UI_ExceptionDisplay exceptiondisplay;
     private Tab_Tchat tchats;
-    private final int refreshRoom = 2000;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -50,25 +49,7 @@ public class MainFrame extends Application {
         primaryStage.setScene(scene);
         primaryStage.show(); 
         
-        //tache de fond de mise à jour de la list
-        ScheduledService t  = new ScheduledService(){
-           @Override
-           protected Task createTask() {
-              return new Task() { 
-                  @Override
-                  protected Object call() throws Exception {
-                      hub.refreshListRoom();
-                      return null;
-                  }
-  
-                                      
-        };
-           }
-          
-       };
-       t.setDelay(Duration.millis(refreshRoom));//premier fois
-       t.setPeriod(Duration.millis(refreshRoom));//entre chaque
-       t.start();
+
         
         
     }
@@ -85,7 +66,9 @@ public class MainFrame extends Application {
         launch(args);
     }
 
-    
+    public void goTchatOnglet(){
+        fenetre.getSelectionModel().select(tchats);
+    }
 
     
     

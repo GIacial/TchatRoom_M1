@@ -32,7 +32,6 @@ public class Tab_Tchat extends Tab{
         this.c = c;
          root = new TabPane();
         this.setContent(root);
-        //
     }
     
     public IC_Tchatroom addTchat(TchatRoom t) {
@@ -40,6 +39,7 @@ public class Tab_Tchat extends Tab{
         try {
             r  = new UI_Tchtroom(t,c,m);
             root.getTabs().add(r);
+            this.root.getSelectionModel().select(r);
         } catch (RemoteException ex) {
             m.showException(ex);
         }

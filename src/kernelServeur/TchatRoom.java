@@ -21,7 +21,7 @@ public interface TchatRoom extends Remote{
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param id l'identifiant du client
 	 */
-	abstract void disconnect(int id) throws RemoteException;
+	abstract void disconnect(int id) throws RemoteException,PseudoNotFoundException;
         
         /**
          * Donne le nom de la salle

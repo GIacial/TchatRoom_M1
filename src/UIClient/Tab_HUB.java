@@ -8,8 +8,6 @@ package UIClient;
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -72,6 +70,7 @@ public class Tab_HUB extends Tab {
                         if(t != null){
                             IC_Tchatroom i = tchats.addTchat(t);
                             c.setUI(t, i);
+                            m.goTchatOnglet();
                         }
                     } catch (TchatRoomNotFoundException | RemoteException | WrongPasswordException | PseudoNotFoundException ex) {
                         m.showException(ex);

@@ -31,6 +31,7 @@ public class UI_TchatroomList extends ScrollPane {
     private VBox list;
     private Tab_HUB master;
 
+    private final int refreshRoom = 3000;
   
     public  UI_TchatroomList(Collection<String> listNom,Tab_HUB m,Client c){
         
@@ -39,8 +40,8 @@ public class UI_TchatroomList extends ScrollPane {
         current = null;
         master = m;
         
-        this.updateRoomList(listNom);
-       //this.updaterRoomList(c);
+       // this.updateRoomList(listNom);
+       this.createUpdaterRoomList(c);
         
         this.setFitToHeight(true);
         this.setFitToWidth(true);
@@ -52,7 +53,14 @@ public class UI_TchatroomList extends ScrollPane {
             public void run() {
                 list.getChildren().clear();
                 for(String a : listNom){
-                    list.getChildren().add(new UI_RoomListItem(a,UI_TchatroomList.this));
+                    UI_RoomListItem i = new UI_RoomListItem(a,UI_TchatroomList.this);
+                    list.getChildren().add(i);
+                    if(current != null){
+                       if(i.getRoomName().equals(current.getRoomName())){
+                            setCurrent(i);
+                        } 
+                    }
+                    
                 }
             }
             
@@ -84,6 +92,24 @@ public class UI_TchatroomList extends ScrollPane {
         return null;
     }
     
+    private void createUpdaterRoomList(Client c){
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                boolean ok = true;
+                while(ok){
+                    try {
+                        updateRoomList(c.getAllTchatRoomName());
+                        Thread.sleep(refreshRoom);
+                    } catch (InterruptedException|RemoteException ex) {
+                       master.showException(ex);
+                    }
+                }
+            }
+            
+        };
+        t.start();
+    }
     
  
 }

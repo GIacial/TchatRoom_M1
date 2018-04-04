@@ -20,6 +20,11 @@ public abstract class AbstractMSG implements Serializable {
 	 */
 	private String auteur;
         
+        public AbstractMSG(){
+            this.destinataire = "";
+            this.auteur = "";
+        }
+        
 
 	public String getDestinataire() {
 		return this.destinataire;

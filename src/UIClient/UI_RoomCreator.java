@@ -47,6 +47,7 @@ public class UI_RoomCreator extends Stage {
         this.initModality(Modality.APPLICATION_MODAL);
         this.initOwner(primaryStage);
         this.c = c;
+        this.m = m;
         this.tchats = tchats;
         BorderPane dialogVbox = new BorderPane();
         nom = new TextField();
@@ -107,6 +108,7 @@ public class UI_RoomCreator extends Stage {
             if(t != null){
                IC_Tchatroom i = tchats.addTchat(t);
                c.setUI(t, i);
+               m.goTchatOnglet();
             }
              this.close();
         } catch (TchatRoomAlreadyExistException ex) {

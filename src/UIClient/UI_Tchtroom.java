@@ -8,7 +8,10 @@ package UIClient;
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -56,7 +59,18 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
                 sendMsgText();
             }
         });
-        //creation du listener et donner a la room (need client)
+        //a la fermeture
+        this.setOnCloseRequest(new EventHandler<Event>(){
+            @Override
+            public void handle(Event event) {
+                try {
+                    c.disconnectFromTchatRoom(room);
+                } catch (RemoteException |PseudoNotFoundException ex) {
+                    m.showException(ex);
+                }
+            }
+            
+        });
     }
     
     @Override
@@ -81,6 +95,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     private void sendMsgText() {    
         try {
             MSG_Text msgObject = new MSG_Text(msgEditor.getText());
+            msgEditor.setText("");
             c.sendMsg(room, msgObject);
         } catch (RemoteException|PseudoNotFoundException ex) {
             m.showException(ex);
