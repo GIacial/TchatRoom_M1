@@ -19,4 +19,7 @@ public class MSG_Video extends AbstractMSG {
 		throw new UnsupportedOperationException();
 	}
 
+         public MSG_Video(String destinataire){
+            super(destinataire);
+        }
 }

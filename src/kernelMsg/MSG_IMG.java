@@ -18,5 +18,9 @@ public class MSG_IMG extends AbstractMSG {
 		// TODO - implement MSG_IMG.affche
 		throw new UnsupportedOperationException();
 	}
+        
+        public MSG_IMG(String destinataire){
+            super(destinataire);
+        }
 
 }

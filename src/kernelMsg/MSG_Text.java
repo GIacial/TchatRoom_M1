@@ -12,9 +12,13 @@ public class MSG_Text extends AbstractMSG {
 	 */
 	private String texte;
         
-        public MSG_Text(String contenu){
-            super();
+        public MSG_Text(String contenu,String destinataire){
+            super(destinataire);
             this.texte = contenu+"";
+        }
+        
+        public MSG_Text(String contenu){
+            this(contenu,"");
         }
 
 	/**
