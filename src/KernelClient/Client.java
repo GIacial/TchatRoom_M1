@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.HashMap;
 import kernelMsg.AbstractMSG;
+import kernelMsg.AlreadyConnectException;
 import kernelMsg.PseudoNonLibreException;
 import kernelMsg.PseudoNotFoundException;
 import kernelMsg.TchatRoomAlreadyExistException;
@@ -70,7 +71,7 @@ public class Client {
 	 * @param nom nom de la salle
 	 * @param mdp mot de passe si priv� (sinon null ou vide)
 	 */
-	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException, RemoteException, WrongPasswordException, PseudoNotFoundException  {
+	public TchatRoom createChatRoom(String nom, String mdp) throws TchatRoomAlreadyExistException, RemoteException, WrongPasswordException, PseudoNotFoundException, AlreadyConnectException  {
                 MsgListenerImpl listener = new MsgListenerImpl();
 		TchatRoom t = this.hub.createChatRoom(nom, mdp, identificateur, listener);
                 this.mesTchats.put(t, listener);
@@ -82,7 +83,7 @@ public class Client {
 	 * @param nom nom de la room
 	 * @param mdp mdp de la room
 	 */
-	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException, RemoteException, WrongPasswordException, PseudoNotFoundException {
+	public TchatRoom connectChatRoom(String nom, String mdp) throws TchatRoomNotFoundException, RemoteException, WrongPasswordException, PseudoNotFoundException, AlreadyConnectException {
              MsgListenerImpl listener = new MsgListenerImpl();
              TchatRoom t = this.hub.connectionChatRoom(nom, mdp, identificateur, listener);
              this.mesTchats.put(t, listener);
@@ -109,6 +110,9 @@ public class Client {
         }
         
         public void disconnect() throws RemoteException, PseudoNotFoundException{
+            for(TchatRoom t : this.mesTchats.keySet()){
+                this.disconnectFromTchatRoom(t);
+            }
             this.hub.disconnect(identificateur);
             this.identificateur = 0;                //0 la valeur de non connection
         }
