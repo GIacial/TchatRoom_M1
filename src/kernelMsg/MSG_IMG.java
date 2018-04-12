@@ -1,5 +1,5 @@
 package kernelMsg;
-
+// J'ai regardé : on peut envoyé sous forme de byte apparemment c'est ce qu'il se fait le plus
 /**
  * MSG d'image
  */

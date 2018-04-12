@@ -55,6 +55,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
 	 * Envoie un msg
 	 * Peut renvoyer l'exception PseudoNotFoundException
 	 * @param msg un msg
+         * @param id destinataire
          * @throws java.rmi.RemoteException
 	 */
         @Override

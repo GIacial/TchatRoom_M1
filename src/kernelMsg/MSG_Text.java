@@ -1,6 +1,7 @@
 package kernelMsg;
 
 import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
 
 /**
  * Un msg de texte
@@ -26,7 +27,13 @@ public class MSG_Text extends AbstractMSG {
 	 * @param bulle la bulle graphique du msg
 	 */
 	public void affiche(IC_BulleMsg bulle) {
-		bulle.addItem(new Label(this.getAuteur()+" : "+texte));
+            Label msg = new Label(this.getAuteur()+" : "+texte);
+            if(this.getDestinataire().equals("")){
+                msg.setTextFill(Paint.valueOf("#000000"));
+            }else{
+                msg.setTextFill(Paint.valueOf("#008891"));
+            }
+            bulle.addItem(msg);
 	}
 
 }

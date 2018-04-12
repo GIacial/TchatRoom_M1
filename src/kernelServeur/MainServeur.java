@@ -20,7 +20,7 @@ public class MainServeur {
         HUBImpl objserv = null;
 
         try {
-            String setProperty = System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
             System.out.println("Creation de l'objet.");
             objserv = new HUBImpl();
             System.out.println("Enregistrement de l'objet.");
