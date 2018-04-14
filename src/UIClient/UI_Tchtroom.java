@@ -7,7 +7,11 @@ package UIClient;
 
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
+import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -21,7 +25,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import kernelMsg.AbstractMSG;
+import kernelMsg.MSG_IMG;
 import kernelMsg.MSG_Text;
 import kernelMsg.PseudoNotFoundException;
 import kernelServeur.TchatRoom;
@@ -40,6 +47,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     private ComboBox pseudoChoice;
     private static final int refreshPseudo = 10000;
     private boolean actif;
+    private Button imgButton;
 
     public UI_Tchtroom(TchatRoom room , Client c,MainFrame m) throws RemoteException{
         super(room.getName());
@@ -52,7 +60,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         HBox bottom = new HBox();
         msgEditor = new TextField();
         Button sendButton = new Button("Envoyer");
-        Button imgButton = new Button("img");
+        imgButton = new Button("img");
          pseudoChoice = new ComboBox();
          this.createUpdaterPseudoList();
         
@@ -68,7 +76,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         imgButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-               
+               sendMsgImg();
             }
         });
         // envoyer text
@@ -124,17 +132,41 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     
     private void sendMsgText() {    
         try {
-            String choix = (String) pseudoChoice.getValue();
-            if(choix == null){
-                choix = "";
-                //System.err.println("Pas encore le pseudo selectionné");
-            }
-            MSG_Text msgObject = new MSG_Text(msgEditor.getText(),choix);
+            
+            MSG_Text msgObject = new MSG_Text(msgEditor.getText(),getDestinataire());
             msgEditor.setText("");
             c.sendMsg(room, msgObject);
         } catch (RemoteException|PseudoNotFoundException ex) {
             m.showException(ex);
         }
+    }
+    
+    private String getDestinataire(){
+        String choix = (String) pseudoChoice.getValue();
+            if(choix == null){
+                choix = "";
+                //System.err.println("Pas encore le pseudo selectionné");
+            }
+        return choix;
+    }
+    
+    private void sendMsgImg(){
+        final FileChooser dialog = new FileChooser(); 
+        dialog.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("images", "*.jpeg", "*.png","*.gif","*.bmp")); 
+        final File file = dialog.showOpenDialog(imgButton.getScene().getWindow()); 
+        if (file != null) { 
+            // Effectuer le traitement. 
+            //System.out.println(file);
+            
+            try {
+                MSG_IMG img = new MSG_IMG(file,getDestinataire());
+                c.sendMsg(room, img);
+            } catch (RemoteException | PseudoNotFoundException ex) {
+               m.showException(ex);
+            } catch (IOException ex) {
+               m.showException(ex);
+            }
+        } 
     }
     
     private void updatePseudoList(){

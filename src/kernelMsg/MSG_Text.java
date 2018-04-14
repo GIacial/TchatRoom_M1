@@ -37,7 +37,7 @@ public class MSG_Text extends AbstractMSG {
                 msg.setTextFill(Paint.valueOf("#000000"));
             }else{
                 msg.setTextFill(Paint.valueOf("#008891"));
-                //msg.setBackground(new Background(new BackgroundFill(Color.VIOLET, CornerRadii.EMPTY, Insets.EMPTY)));
+                msg.setBackground(new Background(new BackgroundFill(Color.VIOLET, CornerRadii.EMPTY, Insets.EMPTY)));
             }
             bulle.addItem(msg);
 	}
