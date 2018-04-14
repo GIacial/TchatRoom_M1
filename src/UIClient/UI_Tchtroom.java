@@ -108,7 +108,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
             String choix = (String) pseudoChoice.getValue();
             if(choix == null){
                 choix = "";
-                System.err.println("Pas encore le pseudo selectionné");
+                //System.err.println("Pas encore le pseudo selectionné");
             }
             MSG_Text msgObject = new MSG_Text(msgEditor.getText(),choix);
             msgEditor.setText("");

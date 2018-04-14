@@ -73,6 +73,11 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
                 if(l != null){
                     l.recvMsg(msg);
                 }
+                l = this.clients.get(msg.getAuteur());
+                if(l != null){
+                    l.recvMsg(msg);//copie pour l'auteur
+                }
+                
             }
             
           

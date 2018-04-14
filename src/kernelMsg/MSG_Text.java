@@ -1,6 +1,11 @@
 package kernelMsg;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 /**
@@ -32,6 +37,7 @@ public class MSG_Text extends AbstractMSG {
                 msg.setTextFill(Paint.valueOf("#000000"));
             }else{
                 msg.setTextFill(Paint.valueOf("#008891"));
+                //msg.setBackground(new Background(new BackgroundFill(Color.VIOLET, CornerRadii.EMPTY, Insets.EMPTY)));
             }
             bulle.addItem(msg);
 	}
