@@ -8,8 +8,6 @@ package UIClient;
 import KernelClient.Client;
 import KernelClient.IC_Tchatroom;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -52,10 +52,11 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         HBox bottom = new HBox();
         msgEditor = new TextField();
         Button sendButton = new Button("Envoyer");
+        Button imgButton = new Button("img");
          pseudoChoice = new ComboBox();
          this.createUpdaterPseudoList();
         
-        bottom.getChildren().addAll(msgEditor,sendButton,pseudoChoice);
+        bottom.getChildren().addAll(imgButton,msgEditor,sendButton,pseudoChoice);
         
         
         layout.setCenter(msg);
@@ -63,10 +64,28 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         this.setContent(layout);
         
         //fonctionnelle des button
+        //envoyer img
+        imgButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+               
+            }
+        });
+        // envoyer text
+            //button
         sendButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
                 sendMsgText();
+            }
+        });
+            //enrer key
+        msgEditor.setOnKeyPressed(new EventHandler<KeyEvent>(){
+            @Override
+            public void handle(KeyEvent event) {
+               if(event.getCode() == KeyCode.ENTER){
+                   sendMsgText();
+               }
             }
         });
         //a la fermeture
