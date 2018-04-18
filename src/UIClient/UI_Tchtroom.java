@@ -30,6 +30,7 @@ import javafx.stage.FileChooser;
 import kernelMsg.AbstractMSG;
 import kernelMsg.MSG_IMG;
 import kernelMsg.MSG_Text;
+import kernelMsg.MSG_Video;
 import kernelMsg.PseudoNotFoundException;
 import kernelServeur.TchatRoom;
 
@@ -48,6 +49,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     private static final int refreshPseudo = 10000;
     private boolean actif;
     private Button imgButton;
+    private Button videoButton;
 
     public UI_Tchtroom(TchatRoom room , Client c,MainFrame m) throws RemoteException{
         super(room.getName());
@@ -61,10 +63,11 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         msgEditor = new TextField();
         Button sendButton = new Button("Envoyer");
         imgButton = new Button("img");
+        videoButton = new Button("vidéo");
          pseudoChoice = new ComboBox();
          this.createUpdaterPseudoList();
         
-        bottom.getChildren().addAll(imgButton,msgEditor,sendButton,pseudoChoice);
+        bottom.getChildren().addAll(videoButton,imgButton,msgEditor,sendButton,pseudoChoice);
         
         
         layout.setCenter(msg);
@@ -77,6 +80,13 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
             @Override
             public void handle(MouseEvent event) {
                sendMsgImg();
+            }
+        });
+        //envoyer video
+         videoButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+               sendMsgVideo();
             }
         });
         // envoyer text
@@ -160,6 +170,25 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
             
             try {
                 MSG_IMG img = new MSG_IMG(file,getDestinataire());
+                c.sendMsg(room, img);
+            } catch (RemoteException | PseudoNotFoundException ex) {
+               m.showException(ex);
+            } catch (IOException ex) {
+               m.showException(ex);
+            }
+        } 
+    }
+    
+     private void sendMsgVideo(){
+        final FileChooser dialog = new FileChooser(); 
+        dialog.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("images", "*.mp4"/*,"*.mp3"*/)); 
+        final File file = dialog.showOpenDialog(imgButton.getScene().getWindow()); 
+        if (file != null) { 
+            // Effectuer le traitement. 
+            //System.out.println(file);
+            
+            try {
+                MSG_Video img = new MSG_Video(file,getDestinataire());
                 c.sendMsg(room, img);
             } catch (RemoteException | PseudoNotFoundException ex) {
                m.showException(ex);
