@@ -42,6 +42,7 @@ public class MainServeur {
                 public void run() {
                     try {
                         objserv.testActiviteRoom();
+                        System.out.println("Lancement"); 
                     } catch (PseudoNotFoundException | RemoteException ex) {
                         Logger.getLogger(MainServeur.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -51,7 +52,7 @@ public class MainServeur {
             Timer timer = new Timer();
 
             // scheduling the task at fixed rate delay
-            timer.scheduleAtFixedRate(tasknew,500,1000);     
+            timer.scheduleAtFixedRate(tasknew,500,3000);     
 
         } catch (Exception e) {
             System.out.println(e);

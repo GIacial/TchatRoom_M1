@@ -51,6 +51,9 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
             this.hub = hub;
             this.identificateur = id; 
             this.clients = new HashMap<>();
+            GregorianCalendar calendar = new GregorianCalendar();
+            Date time  = calendar.getTime();
+            this.tempsDerniereActivite = time; 
         }
         
 	/**
@@ -176,6 +179,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
                 }catch(Exception e){
                     int id = this.identificateur.getId(pseudo); 
                     this.identificateur.disconnect(id);
+                    System.out.println("Déconnexion");
                 }
               
             }  

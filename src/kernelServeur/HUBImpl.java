@@ -159,11 +159,14 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	public void testActiviteRoom() throws PseudoNotFoundException, RemoteException{
             GregorianCalendar calendar = new GregorianCalendar();
             Date time  = calendar.getTime();
+            System.out.println("ok");
             for(TchatRoomImpl t:this.TchatRooms.values()){ //pour chaque tchatRoom
-                long diff = t.getDate().getTime() - time.getTime(); //différence de temps
-                if(diff > 30){ 
+                long diff = time.getTime() - t.getDate().getTime(); //différence de temps
+                System.out.println("diff : " + diff); 
+                if(diff > 3000){ 
                     //Si inactif depuis ....
                     t.sendCheck();
+                    System.out.println("Check effectué"); 
                 }
 
             }
