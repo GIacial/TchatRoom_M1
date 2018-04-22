@@ -54,6 +54,7 @@ public class MainFrame extends Application {
                 try {
                     c.disconnect();
                     onRun = false;
+                    stop();
                 } catch (Exception  ex) {
                    
                 }
