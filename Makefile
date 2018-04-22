@@ -1,7 +1,7 @@
 
 
 JAVAC = javac
-EXEC = exo12cpp exo12.exe jar
+EXEC = myProgram  jar
 sources = $(wildcard *.java)
 classes = $(sources:.java=.class)
 
@@ -15,7 +15,7 @@ myProgram: $(classes)
 	$(JAVAC) $<
 
 jar: $(classes)
-	jar cvfm exo12.jar MANIFEST.MF $(classes)
+	jar cvfm tchatroom.jar MANIFEST.MF $(classes)
 
 
 
