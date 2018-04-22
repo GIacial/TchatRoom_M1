@@ -184,16 +184,24 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
                     this.identificateur.disconnect(id);
                     this.clients.remove(pseudo); 
                     System.out.println("Déconnexion");
-                    if(this.clients.isEmpty()){
-                     this.hub.removeRoom(this);
-                     }
+                    
                 }
               
-            }  
+            } 
+            
+           
            
             GregorianCalendar calendar = new GregorianCalendar();
             Date time  = calendar.getTime();
             this.tempsDerniereActivite = time; 
+            
+             if(this.clients.isEmpty()){
+                    System.err.println("Destruction de la room");
+                     this.hub.removeRoom(this);
+            }
+             else{
+                 System.err.println("il reste des gens de la room");
+             }
            
 	}
         
