@@ -168,9 +168,16 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
         }
         
         public void sendCheck() throws PseudoNotFoundException,RemoteException{
-            AbstractMSG msg = null; 
-            for(MsgListener l : this.clients.values()){
-              l.recvMsg(msg);
+            AbstractMSG msg = null;
+            
+            for(String pseudo : this.clients.keySet()){
+                try{
+                    this.clients.get(pseudo).recvMsg(msg);
+                }catch(Exception e){
+                    int id = this.identificateur.getId(pseudo); 
+                    this.identificateur.disconnect(id);
+                }
+              
             }  
            
             GregorianCalendar calendar = new GregorianCalendar();

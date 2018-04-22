@@ -70,4 +70,20 @@ public class IdentificateurImpl implements Serializable{
                 return (String) this.pseudos.get(id);
 	}
 
+         
+         public int getId(String pseudo)throws PseudoNotFoundException {
+		if(!this.pseudos.containsValue(pseudo)){
+                    throw new PseudoNotFoundException();
+                }
+                
+                int id = 0; 
+                for (HashMap.Entry c : this.pseudos.entrySet()){
+                    if(c.getValue().equals(pseudo)){
+                        id = (int) c.getKey(); 
+                    }
+                }
+                return id; 
+          
+	}
+         
 }
