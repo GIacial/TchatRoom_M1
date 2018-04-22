@@ -62,8 +62,8 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         HBox bottom = new HBox();
         msgEditor = new TextField();
         Button sendButton = new Button("Envoyer");
-        imgButton = new Button("img");
-        videoButton = new Button("vidéo");
+        imgButton = new Button("Image");
+        videoButton = new Button("Media");
          pseudoChoice = new ComboBox();
          this.createUpdaterPseudoList();
         
@@ -181,7 +181,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
     
      private void sendMsgVideo(){
         final FileChooser dialog = new FileChooser(); 
-        dialog.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("images", "*.mp4"/*,"*.mp3"*/)); 
+        dialog.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("images", "*.mp4","*.mp3")); 
         final File file = dialog.showOpenDialog(imgButton.getScene().getWindow()); 
         if (file != null) { 
             // Effectuer le traitement. 
@@ -225,7 +225,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
             @Override
             public void run() {
                 boolean ok = true;
-                while(ok && actif){
+                while(ok && actif && MainFrame.onRun){
                     try {
                         updatePseudoList();
                         Thread.sleep(refreshPseudo);
