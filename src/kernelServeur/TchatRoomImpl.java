@@ -179,6 +179,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
                 }catch(Exception e){
                     int id = this.identificateur.getId(pseudo); 
                     this.identificateur.disconnect(id);
+                    this.clients.remove(pseudo); 
                     System.out.println("Déconnexion");
                 }
               
