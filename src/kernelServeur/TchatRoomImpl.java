@@ -119,7 +119,9 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
         @Override
 	public void disconnect(int id)throws PseudoNotFoundException,RemoteException{
             String pseudo = this.identificateur.getPseudo(id);
-            this.clients.remove(pseudo);
+            synchronized(clients){
+                this.clients.remove(pseudo);
+            }
             welcomeMsg(pseudo," a quitté la salle");
             if(this.clients.isEmpty()){
                 this.hub.removeRoom(this);
@@ -133,7 +135,9 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
          * @throws java.rmi.RemoteException
 	 */
 	public void addClient(String pseudo, MsgListener listener){
+            synchronized(clients){
             this.clients.put(pseudo, listener); 
+            }
 	}
 
         /**

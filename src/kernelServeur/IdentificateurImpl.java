@@ -37,7 +37,9 @@ public class IdentificateurImpl implements Serializable{
                 while(this.pseudos.containsKey(key)){   //evite d'avoir 2 fois le meme
                     key = (int)(pseudo.hashCode()*(Math.random()*coefMult+decal));
                 }
-                this.pseudos.put(key, pseudo);
+                synchronized(pseudos){
+                    this.pseudos.put(key, pseudo);
+                }
                 return key;
 	}
 
@@ -51,7 +53,9 @@ public class IdentificateurImpl implements Serializable{
 		if(!this.pseudos.containsKey(id)){
                     throw new PseudoNotFoundException();
                 }
-                this.pseudos.remove(id);
+                synchronized(pseudos){
+                    this.pseudos.remove(id);
+                }
 	}
 
 	/**

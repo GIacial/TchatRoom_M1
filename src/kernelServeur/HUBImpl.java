@@ -93,8 +93,9 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
             } catch (RemoteException ex) {
                 Logger.getLogger(HUBImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            this.TchatRooms.put(nom, tchatRoom); 
+            synchronized(TchatRooms){
+                this.TchatRooms.put(nom, tchatRoom); 
+            }
             this.TchatRooms.get(nom).connect(id, listener, mdp); 
             return tchatRoom; 
             
@@ -132,8 +133,10 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 * @param room la room
 	 */
 	public void removeRoom(TchatRoom room) throws RemoteException{
-            
-		this.TchatRooms.remove(room.getName());
+            synchronized(TchatRooms){
+                this.TchatRooms.remove(room.getName());
+            }
+		
 	}
 
 	/**
