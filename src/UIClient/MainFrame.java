@@ -36,9 +36,7 @@ public class MainFrame extends Application {
     private UI_ExceptionDisplay exceptiondisplay;
     private Tab_Tchat tchats;
     
-    private MainFrame(){
-        super();
-    }
+
     
     @Override
     public void start(Stage primaryStage) throws Exception {

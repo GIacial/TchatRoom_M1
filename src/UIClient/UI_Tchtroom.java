@@ -17,6 +17,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -70,7 +71,7 @@ public class UI_Tchtroom extends Tab implements IC_Tchatroom {
         bottom.getChildren().addAll(videoButton,imgButton,msgEditor,sendButton,pseudoChoice);
         
         
-        layout.setCenter(msg);
+        layout.setCenter(new ScrollPane(msg));
         layout.setBottom(bottom);
         this.setContent(layout);
         
