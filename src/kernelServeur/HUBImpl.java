@@ -6,6 +6,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +51,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 */
         @Override
 	public int connexion(String pseudo) throws PseudoNonLibreException{
-                return this.identificater.connexion(pseudo); 
+            return this.identificater.connexion(pseudo); 
                 
 	}
 
@@ -107,11 +109,11 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	 */
         @Override
 	public Collection<String> getAllChatRoom() throws RemoteException{
-                ArrayList<String> r = new ArrayList<>();    //cause keySet not Serializable
-                for(String t:this.TchatRooms.keySet()){
-                    r.add(t);
-                }
-		return r; 
+            ArrayList<String> r = new ArrayList<>();    //cause keySet not Serializable
+            for(String t:this.TchatRooms.keySet()){
+                r.add(t);
+            }
+            return r; 
 	}
 
 	/**
@@ -154,9 +156,17 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	/**
 	 * Teste l'activit� des chatroom , si une room n'est pas assez active on envoie un object msg null pour verifier si le listener est joingnable
 	 */
-	private void testActiviteRoom(){
-		// TODO - implement HUBImpl.testActiviteRoom
-		throw new UnsupportedOperationException();
+	private void testActiviteRoom() throws PseudoNotFoundException, RemoteException{
+            GregorianCalendar calendar = new GregorianCalendar();
+            Date time  = calendar.getTime();
+            for(TchatRoomImpl t:this.TchatRooms.values()){ //pour chaque tchatRoom
+                long diff = t.getDate().getTime() - time.getTime(); //différence de temps
+                if(diff > 30){ 
+                    //Si inactif depuis ....
+                    t.sendCheck();
+                }
+
+            }
 	}
 
 }

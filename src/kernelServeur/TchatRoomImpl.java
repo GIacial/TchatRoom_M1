@@ -7,6 +7,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +31,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
 	 * la date de la derniere activit�
 	 * //Permet au hub de v�rifie si des channels on des personne qui on crash
 	 */
-	private int tempsDerniereActivite;
+	private Date tempsDerniereActivite;
 	/**
 	 * lien sur identificateur du hub
 	 */
@@ -79,8 +81,10 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
                 }
                 
             }
-            
-          
+            GregorianCalendar calendar = new GregorianCalendar();
+            Date time  = calendar.getTime();
+            this.tempsDerniereActivite = time; 
+           
 	}
 
         
@@ -161,5 +165,21 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
                 r.add(n);
             }
             return r;
+        }
+        
+        public void sendCheck() throws PseudoNotFoundException,RemoteException{
+            AbstractMSG msg = null; 
+            for(MsgListener l : this.clients.values()){
+              l.recvMsg(msg);
+            }  
+           
+            GregorianCalendar calendar = new GregorianCalendar();
+            Date time  = calendar.getTime();
+            this.tempsDerniereActivite = time; 
+           
+	}
+        
+        public Date getDate(){
+            return this.tempsDerniereActivite; 
         }
 }
