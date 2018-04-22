@@ -103,18 +103,18 @@ public class Client {
         }
         
         public void disconnectFromTchatRoom(TchatRoom t) throws RemoteException, PseudoNotFoundException{
-            if(this.mesTchats.containsKey(t)){
+           /* if(this.mesTchats.containsKey(t)){
                 t.disconnect(identificateur);
                 this.mesTchats.remove(t);
-            }
+            }*/
         }
         
         public void disconnect() throws RemoteException, PseudoNotFoundException{
-            for(TchatRoom t : this.mesTchats.keySet()){
+           /* for(TchatRoom t : this.mesTchats.keySet()){
                 this.disconnectFromTchatRoom(t);
             }
             this.hub.disconnect(identificateur);
-            this.identificateur = 0;                //0 la valeur de non connection
+            this.identificateur = 0;                //0 la valeur de non connection*/
         }
 
 }
