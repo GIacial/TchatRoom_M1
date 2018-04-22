@@ -1,5 +1,6 @@
 package KernelClient;
 
+import UIClient.MainFrame;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import kernelMsg.AbstractMSG;
@@ -22,10 +23,12 @@ public class MsgListenerImpl extends UnicastRemoteObject implements MsgListener 
 	 * @param InterfaceClient le panel qui affiche les msg de la tchatroom
 	 */
         @Override
-	public void recvMsg(AbstractMSG msg){
+	public void recvMsg(AbstractMSG msg) throws RemoteException{
+            
             if(this.interfaceTchatroom != null && msg!=null){
                 this.interfaceTchatroom.addMsg(msg);
             }
+            
 		
 	}
         
