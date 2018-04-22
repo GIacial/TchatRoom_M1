@@ -7,6 +7,12 @@ package kernelServeur;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import kernelMsg.PseudoNotFoundException;
 
 /**
  *
@@ -26,9 +32,29 @@ public class MainServeur {
             System.out.println("Enregistrement de l'objet.");
             Naming.rebind(factory_service,(Remote) objserv);
             System.out.println("serveur operationnel.");
+            
+
+            //Timer
+            TimerTask tasknew;
+            tasknew = new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        objserv.testActiviteRoom();
+                    } catch (PseudoNotFoundException | RemoteException ex) {
+                        Logger.getLogger(MainServeur.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }; 
+            
+            Timer timer = new Timer();
+
+            // scheduling the task at fixed rate delay
+            timer.scheduleAtFixedRate(tasknew,500,1000);     
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
+     
 }

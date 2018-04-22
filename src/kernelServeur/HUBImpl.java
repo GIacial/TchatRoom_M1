@@ -156,7 +156,7 @@ public class HUBImpl extends UnicastRemoteObject implements HUB, Serializable{
 	/**
 	 * Teste l'activit� des chatroom , si une room n'est pas assez active on envoie un object msg null pour verifier si le listener est joingnable
 	 */
-	private void testActiviteRoom() throws PseudoNotFoundException, RemoteException{
+	public void testActiviteRoom() throws PseudoNotFoundException, RemoteException{
             GregorianCalendar calendar = new GregorianCalendar();
             Date time  = calendar.getTime();
             for(TchatRoomImpl t:this.TchatRooms.values()){ //pour chaque tchatRoom
