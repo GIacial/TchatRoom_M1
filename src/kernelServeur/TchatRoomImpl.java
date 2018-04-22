@@ -100,6 +100,7 @@ public class TchatRoomImpl extends UnicastRemoteObject implements TchatRoom, Ser
         
         private void welcomeMsg(String pseudo, String message){
             MSG_Text msg = new MSG_Text(pseudo+ message);
+            msg.setAuteur(pseudo);
             for(MsgListener l : this.clients.values()){
                 try {
                     l.recvMsg(msg);
