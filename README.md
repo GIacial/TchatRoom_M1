@@ -11,10 +11,10 @@ Execution :
 Taper : java -jar  ?????? 
 
 Utilisation : 
-Aller a : (la ou il a build le serveur) 
+Aller a : (la ou il a build le serveur) ??????
 Taper : rmiregistry
-Ensuite il faut lancer le serveur, pour cela lancer le dans un autre terminal
-Pour finir lancer autant de client que necessaire (en restant raisonnable bien entendu)
+Ensuite il faut lancer le serveur, pour cela lancer le dans un autre terminal (l'executable est dans ????? )
+Pour finir lancer autant de client que necessaire (en restant raisonnable bien entendu). L'executable est ???????? 
 
 Déroulement : Au début il faut saisir un pseudo qui n'est pas déjà pris
 Ensuite, il y a deux possibilité : créer des salons ou en rejoindre. 
